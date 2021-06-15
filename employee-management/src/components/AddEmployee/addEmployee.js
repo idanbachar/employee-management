@@ -4,8 +4,6 @@ import Container from 'react-bootstrap/Container'
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
 
-
-
 const AddEmployee = (props) => {
 
     const [firstname, setFirstName] = useState('');
@@ -47,16 +45,16 @@ const AddEmployee = (props) => {
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="formGroupPhone">
                             <Form.Label>Phone</Form.Label>
-                            <Form.Control type="phone" placeholder="Enter Phone Number" onChange={(e) => setPhone(e.target.value)} />
+                            <Form.Control type="phone" placeholder="Enter Phone Number" maxLength="10" onChange={(e) => setPhone(e.target.value)} />
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="formGroupAddress">
                             <Form.Label>Address</Form.Label>
                             <Form.Control type="text" placeholder="Enter Address" onChange={(e) => setAddress(e.target.value)} />
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="formGroupRoll">
-                            <Form.Select >
+                            {/* <Form.Select >
                                 <option>Disabled select</option>
-                            </Form.Select>
+                            </Form.Select> */}
                         </Form.Group>
 
                     </Form>
@@ -65,8 +63,8 @@ const AddEmployee = (props) => {
                 </Container>
             </Modal.Body>
             <Modal.Footer>
-                <Button onClick={props.onHide}>Close</Button>
-                <Button onClick={() => validateData()}> Add Employee!</Button>
+                <Button variant="success" onClick={() => validateData()}>Add Employee</Button>
+                <Button variant="danger" onClick={props.onHide}>Cancel</Button>
             </Modal.Footer>
         </Modal >
     );

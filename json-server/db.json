@@ -1,53 +1,57 @@
 {
-  "users": [
-    {
-      "id": 1,
-      "firstname": "idan",
-      "lastname": "bachar",
-      "email": "idanac2@gmail.com",
-      "password": "password"
-    }
-  ],
-  "employees": [
-    {
-      "id": 1,
-      "firstname": "idan",
-      "lastname": "bachar",
-      "email": "idanac2@gmail.com",
-      "phone": "054 4762652",
-      "address": "Rotschild 22, Tel Aviv",
-      "roll": "HR",
-      "startdate": "2 Feb 2020"
-    },
-    {
-      "id": 2,
-      "firstname": "alon",
-      "lastname": "cohen",
-      "email": "alonc2500@gmail.com",
-      "phone": "054 4762652",
-      "address": "Rotschild 22, Tel Aviv",
-      "roll": "HR",
-      "startdate": "2 Feb 2020"
-    },
-    {
-      "id": 3,
-      "firstname": "gleb",
-      "lastname": "kuga",
-      "email": "glebakugan@gmail.com",
-      "phone": "054 4762652",
-      "address": "Rotschild 22, Tel Aviv",
-      "roll": "HR",
-      "startdate": "2 Feb 2020"
-    },
-    {
-      "id": 4,
-      "firstname": "ofek",
-      "lastname": "sadlovski",
-      "email": "ofekyofi@gmail.com",
-      "phone": "054 4762652",
-      "address": "Rotschild 22, Tel Aviv",
-      "roll": "HR",
-      "startdate": "2 Feb 2020"
-    }
-  ]
+    "users": [
+        {
+            "id": 1,
+            "firstname": "idan",
+            "lastname": "bachar",
+            "email": "idanac2@gmail.com",
+            "password": "password"
+        }
+    ],
+    "roles": [
+        {
+            
+        }
+    ],
+    "employees": [
+        {
+            "id": 2,
+            "firstname": "alon",
+            "lastname": "cohen",
+            "email": "alonc2500@gmail.com",
+            "phone": "054 4762652",
+            "address": "Rotschild 22, Tel Aviv",
+            "roll": "HR",
+            "startdate": "2 Feb 2020"
+        },
+        {
+            "id": 3,
+            "firstname": "gleb",
+            "lastname": "kuga",
+            "email": "glebakugan@gmail.com",
+            "phone": "054 4762652",
+            "address": "Rotschild 22, Tel Aviv",
+            "roll": "HR",
+            "startdate": "2 Feb 2020"
+        },
+        {
+            "id": 4,
+            "firstname": "ofek",
+            "lastname": "sadlovski",
+            "email": "ofekyofi@gmail.com",
+            "phone": "054 4762652",
+            "address": "Rotschild 22, Tel Aviv",
+            "roll": "HR",
+            "startdate": "2 Feb 2020"
+        },
+        {
+            "id": "110c2e44-739a-4e74-b6e5-2974a33fed18",
+            "firstname": "Idan",
+            "lastname": "Bachar",
+            "phone": "0544762652",
+            "address": "balfour",
+            "roll": "HR",
+            "startdate": "2 Feb 2020"
+        }
+    ]
 }

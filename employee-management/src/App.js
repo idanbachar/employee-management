@@ -5,7 +5,7 @@ import Manage from './pages/manage';
 import Employees from './pages/employees';
 import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
-
+import Nav from 'react-bootstrap/Nav'
 
 import {
   BrowserRouter as Router,
@@ -18,20 +18,20 @@ function App() {
   return (
 
     <div className="App">
-      <Router>
-        <Navbar expand="lg" variant="light" bg="light">
-          <Container>
-            <Navbar.Brand href="#">
-              <nav>
-                <Link to="/login"> Login</Link> |
-                <Link to="/register"> Register</Link> |
-                <Link to="/manage"> Manage</Link> |
-                <Link to="/employees"> Employees</Link>
-              </nav>
 
-            </Navbar.Brand>
-          </Container>
+      <Router>
+        <Navbar bg="light" variant="light" style={{ boxShadow: '0px 2px 29px 1px #888888' }}>
+          <Navbar.Brand><img src="https://ls-techs.com/wp-content/uploads/2019/07/logo.png" /></Navbar.Brand>
+          <Nav className="mr-auto">
+            <Link to="/login"> Login</Link> |
+            <Link to="/register"> Register</Link>  |
+            <Link to="/manage"> Manage</Link>  |
+            <Link to="/employees"> Employees</Link> 
+          </Nav>
+
         </Navbar>
+
+
         <header className="App-header">
 
           <div>
