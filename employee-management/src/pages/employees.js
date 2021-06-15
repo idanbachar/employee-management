@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import Employee from '../components/employee/employee';
 import Table from 'react-bootstrap/Table';
 
 const Employees = () => {
@@ -16,9 +15,9 @@ const Employees = () => {
     }, [])
 
     return (
-        <div>
+        <div style={{ backgroundColor: 'white', fontSize: '20px', textAlign: 'center' }}>
 
-            <Table striped bordered hover>
+            <Table>
                 <thead>
                     <tr>
                         <th>First Name</th>

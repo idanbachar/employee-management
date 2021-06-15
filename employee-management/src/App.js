@@ -3,6 +3,9 @@ import Login from './pages/login';
 import Register from './pages/register';
 import Manage from './pages/manage';
 import Employees from './pages/employees';
+import Container from 'react-bootstrap/Container';
+import Navbar from 'react-bootstrap/Navbar';
+
 
 import {
   BrowserRouter as Router,
@@ -13,26 +16,26 @@ import {
 
 function App() {
   return (
+
     <div className="App">
-      <header className="App-header">
-        <Router>
+      <Router>
+        <Navbar expand="lg" variant="light" bg="light">
+          <Container>
+            <Navbar.Brand href="#">
+              <nav>
+                <Link to="/login"> Login</Link> |
+                <Link to="/register"> Register</Link> |
+                <Link to="/manage"> Manage</Link> |
+                <Link to="/employees"> Employees</Link>
+              </nav>
+
+            </Navbar.Brand>
+          </Container>
+        </Navbar>
+        <header className="App-header">
+
           <div>
-            <nav>
-              <ul>
-                <li>
-                  <Link to="/login">login</Link>
-                </li>
-                <li>
-                  <Link to="/register">register</Link>
-                </li>
-                <li>
-                  <Link to="/manage">manage</Link>
-                </li>
-                <li>
-                  <Link to="/employees">employees</Link>
-                </li>
-              </ul>
-            </nav>
+
 
             {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
@@ -51,9 +54,9 @@ function App() {
               </Route>
             </Switch>
           </div>
-        </Router>
-      </header>
-    </div>
+        </header>
+      </Router>
+    </div >
   );
 }
 

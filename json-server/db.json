@@ -1,7 +1,7 @@
 {
     "users": [
         {
-            "id": "1",
+            "id": 1,
             "firstname": "idan",
             "lastname": "bachar",
             "email": "idanac2@gmail.com",
@@ -10,7 +10,7 @@
     ],
     "employees": [
         {
-            "id:": 1,
+            "id": 1,
             "firstname": "idan",
             "lastname": "bachar",
             "email": "idanac2@gmail.com",
@@ -20,7 +20,7 @@
             "startdate": "2 Feb 2020"
         },
         {
-            "id:": 2,
+            "id": 2,
             "firstname": "alon",
             "lastname": "cohen",
             "email": "alonc2500@gmail.com",
@@ -30,7 +30,7 @@
             "startdate": "2 Feb 2020"
         },
         {
-            "id:": 3,
+            "id": 3,
             "firstname": "gleb",
             "lastname": "kuga",
             "email": "glebakugan@gmail.com",
