@@ -7,5 +7,37 @@
             "email": "idanac2@gmail.com",
             "password": "password"
         }
+    ],
+    "employees": [
+        {
+            "id:": 1,
+            "firstname": "idan",
+            "lastname": "bachar",
+            "email": "idanac2@gmail.com",
+            "phone": "054 4762652",
+            "address": "Rotschild 22, Tel Aviv",
+            "roll": "HR",
+            "startdate": "2 Feb 2020"
+        },
+        {
+            "id:": 2,
+            "firstname": "alon",
+            "lastname": "cohen",
+            "email": "alonc2500@gmail.com",
+            "phone": "054 4762652",
+            "address": "Rotschild 22, Tel Aviv",
+            "roll": "HR",
+            "startdate": "2 Feb 2020"
+        },
+        {
+            "id:": 3,
+            "firstname": "gleb",
+            "lastname": "kuga",
+            "email": "glebakugan@gmail.com",
+            "phone": "054 4762652",
+            "address": "Rotschild 22, Tel Aviv",
+            "roll": "HR",
+            "startdate": "2 Feb 2020"
+        }
     ]
 }
