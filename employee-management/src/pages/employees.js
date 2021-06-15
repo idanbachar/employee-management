@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Table from 'react-bootstrap/Table';
 import axios from 'axios';
+import EmployeeCard from '../components/EmployeeCard/EmployeeCard';
 
 const api = axios.create({
     baseURL: `http://localhost:3000/employees`
@@ -38,15 +39,18 @@ const Employees = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {employees.map(e =>
-                            <tr>
-                                <td>{e.firstname}</td>
-                                <td>{e.lastname}</td>
-                                <td>{e.phone}</td>
-                                <td>{e.address}</td>
-                                <td>{e.roll}</td>
-                                <td>{e.startdate}</td>
-                            </tr>)}
+
+                        {employees.map(employee =>
+
+                            <EmployeeCard
+                                firstname={employee.firstname}
+                                lastname={employee.lastname}
+                                phone={employee.phone}
+                                address={employee.address}
+                                roll={employee.roll}
+                                startdate={employee.startdate}
+                                isEditable={false} />
+                        )}
 
                     </tbody>
                 </Table>

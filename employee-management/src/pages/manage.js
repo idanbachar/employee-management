@@ -2,9 +2,11 @@ import React, { useEffect, useState } from 'react';
 import Table from 'react-bootstrap/Table';
 import axios from 'axios';
 import AddEmployee from '../components/AddEmployee/addEmployee';
+import EditEmployee from '../components/EditEmployee/editEmployee';
 import { v4 as uuidv4 } from 'uuid';
 import { PencilFill, TrashFill } from 'react-bootstrap-icons';
 import Button from 'react-bootstrap/Button'
+import EmployeeCard from '../components/EmployeeCard/EmployeeCard';
 
 const api = axios.create({
     baseURL: `http://localhost:3000/employees`
@@ -14,6 +16,7 @@ const Manage = () => {
 
     const [employees, setEmployees] = useState([]);
     const [addEmployeeModalShow, setEmployeeModalShow] = useState(false);
+    const [editEmployeeModalShow, setEditEmployeeModalShow] = useState(false);
 
     useEffect(async () => {
         getEmployees();
@@ -49,7 +52,7 @@ const Manage = () => {
             <div align="right">
                 <Button variant="primary" onClick={() => setEmployeeModalShow(true)}>
                     + Add Employee
-            </Button>
+                </Button>
             </div>
             <AddEmployee addEmployee={addEmployee} show={addEmployeeModalShow} onHide={() => setEmployeeModalShow(false)} />
 
@@ -68,21 +71,19 @@ const Manage = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {employees.map(e =>
-                            <tr>
-                                <td>{e.firstname}</td>
-                                <td>{e.lastname}</td>
-                                <td>{e.phone}</td>
-                                <td>{e.address}</td>
-                                <td>{e.roll}</td>
-                                <td>{e.startdate}</td>
-                                <td><Button><PencilFill /></Button></td>
-                                <td><Button variant="danger" onClick={() => deleteEmployee(e.id)}><TrashFill /> </Button></td>
-                            </tr>)}
-
+                        {employees.map(employee =>
+                            <EmployeeCard
+                                firstname={employee.firstname}
+                                lastname={employee.lastname}
+                                phone={employee.phone}
+                                address={employee.address}
+                                roll={employee.roll}
+                                startdate={employee.startdate}
+                                isEditable={true}
+                                deleteHandler={() => deleteEmployee(employee.id)} />
+                        )}
                     </tbody>
                 </Table>
-
             </div >
         </div >
     )
