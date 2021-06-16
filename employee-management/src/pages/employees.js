@@ -44,7 +44,7 @@ const Employees = () => {
                             <th>Last Name</th>
                             <th>Phone</th>
                             <th>Address</th>
-                            <th>Roll</th>
+                            <th>Role</th>
                             <th>Start Date</th>
                         </tr>
                     </thead>
@@ -57,8 +57,8 @@ const Employees = () => {
                                 lastname={employee.lastname}
                                 phone={employee.phone}
                                 address={employee.address}
-                                roll={employee.roll}
-                                startdate={employee.startdate}
+                                role={employee.role}
+                                startDate={employee.startDate}
                                 isEditable={false} />
                         )}
 

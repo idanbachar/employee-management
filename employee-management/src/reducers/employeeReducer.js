@@ -19,6 +19,8 @@ const employeeReducer = (state = initialState, action) => {
             employees[employeeIndex].lastname = action.payload.lastname;
             employees[employeeIndex].phone = action.payload.phone;
             employees[employeeIndex].address = action.payload.address;
+            employees[employeeIndex].role = action.payload.role;
+            employees[employeeIndex].startDate = action.payload.startDate;
 
             state = employees;
 

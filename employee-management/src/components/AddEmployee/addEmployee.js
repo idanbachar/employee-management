@@ -3,6 +3,9 @@ import Modal from 'react-bootstrap/Modal'
 import Container from 'react-bootstrap/Container'
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
+import Select from 'react-select';
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 const AddEmployee = (props) => {
 
@@ -10,6 +13,14 @@ const AddEmployee = (props) => {
     const [lastname, setLastName] = useState('');
     const [phone, setPhone] = useState('');
     const [address, setAddress] = useState('');
+    const [role, setRole] = useState('');
+    const [startDate, setStartDate] = useState(new Date());
+
+    const roles = [
+        { label: 'HR', value: 'HR' },
+        { label: 'Programmer', value: 'Programmer' },
+        { label: 'Data Analyst', value: 'Data Analyst' }
+    ]
 
     const validateData = () => {
 
@@ -18,8 +29,8 @@ const AddEmployee = (props) => {
             "lastname": lastname,
             "phone": phone,
             "address": address,
-            "roll": "HR",
-            "startdate": "2 Feb 2020"
+            "role": role,
+            "startDate": startDate.toDateString()
         }
         props.addEmployee(data);
     }
@@ -29,7 +40,7 @@ const AddEmployee = (props) => {
             <Modal.Header closeButton>
                 <Modal.Title id="contained-modal-title-vcenter">
                     Add Employee
-              </Modal.Title>
+                </Modal.Title>
             </Modal.Header>
             <Modal.Body className="show-grid">
                 <Container>
@@ -51,11 +62,17 @@ const AddEmployee = (props) => {
                             <Form.Control type="text" placeholder="Enter Address" onChange={(e) => setAddress(e.target.value)} />
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="formGroupRoll">
-                            {/* <Form.Select >
-                                <option>Disabled select</option>
-                            </Form.Select> */}
+                            <Form.Label>Role</Form.Label>
+                            <Select
+                                label="Select somthing"
+                                options={roles}
+                                onChange={(e) => setRole(e.value)}
+                            />
                         </Form.Group>
-
+                        <Form.Group className="mb-3" controlId="formGroupRoll">
+                            <Form.Label>Start Date</Form.Label>
+                            <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} />
+                        </Form.Group>
                     </Form>
 
 

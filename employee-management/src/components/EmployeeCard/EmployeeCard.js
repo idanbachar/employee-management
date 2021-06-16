@@ -9,8 +9,8 @@ const EmployeeCard = (props) => {
             <td>{props.lastname}</td>
             <td>{props.phone}</td>
             <td>{props.address}</td>
-            <td>{props.roll}</td>
-            <td>{props.startdate}</td>
+            <td>{props.role}</td>
+            <td>{props.startDate}</td>
             {props.isEditable ?
                 <div>
                     <td><EditEmployee data={props} /></td>
