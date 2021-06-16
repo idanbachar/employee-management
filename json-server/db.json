@@ -1,58 +1,31 @@
 {
   "employees": [
     {
-      "id": "97760040-c926-49e3-ace1-50d902813357",
+      "id": "bc0ae11c-d993-4380-913c-6a61c6e78557",
       "firstname": "Idan",
       "lastname": "Bachar",
       "phone": "0544762652",
       "address": "Balfour",
       "role": "Programmer",
-      "startDate": "Tue Jun 01 2021"
+      "startDate": "Wed Jun 16 2021"
     },
     {
-      "id": "e6e33cc2-3973-41e3-86b3-c075684ea667",
+      "id": "96b59979-b17d-468b-9308-03d98de5ccff",
       "firstname": "Alon",
       "lastname": "Cohen",
-      "phone": "0240140214",
+      "phone": "0544321451",
       "address": "Arlozorov",
       "role": "Programmer",
-      "startDate": "Mon Jun 07 2021"
+      "startDate": "Sun Jun 06 2021"
     },
     {
-      "id": "411c319a-1085-46fd-bc93-00c18ed3385d",
-      "firstname": "Netanel",
-      "lastname": "Ashkenazi",
-      "phone": "0424024124",
-      "address": "Rehovot",
-      "role": "Data Analyst",
-      "startDate": "Thu Jun 10 2021"
-    },
-    {
-      "id": "891ba52c-2986-410b-882a-1161d485c13f",
+      "id": "2d28e382-b8be-4fc6-8827-5beda8bf5cb3",
       "firstname": "Ofek",
       "lastname": "Sadlovski",
-      "phone": "0452145214",
+      "phone": "0522223212",
       "address": "Jerusalem",
       "role": "HR",
-      "startDate": "Sat Jun 05 2021"
-    },
-    {
-      "id": "af598659-5bfd-4594-b633-80be3ea8a254",
-      "firstname": "Gleb",
-      "lastname": "Kuga",
-      "phone": "4214124421",
-      "address": "Daniel",
-      "role": "Programmer",
-      "startDate": "Fri Jun 11 2021"
-    },
-    {
-      "id": "865f9566-253a-4a59-b32a-c35b17e778b7",
-      "firstname": "Lior",
-      "lastname": "Zemah",
-      "phone": "0421342142",
-      "address": "Balfour",
-      "role": "Programmer",
-      "startDate": "Sun Jun 20 2021"
+      "startDate": "Tue Jun 01 2021"
     }
   ]
 }

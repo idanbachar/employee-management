@@ -30,6 +30,7 @@ const Manage = () => {
     const getEmployees = async () => {
         let data = await api.get('/')
             .then(({ data }) => data);
+
         setEmployees(data);
         dispatch({
             type: 'INIT',
