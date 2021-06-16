@@ -20,8 +20,8 @@ const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
-    const [emailValidation, setEmailnameValidation] = useState(null);
-    const [passwordValidation, setPasswordnameValidation] = useState(null);
+    const [emailValidation, setEmailValidation] = useState(null);
+    const [passwordValidation, setPasswordValidation] = useState(null);
 
     const formLabelStyle = {
         margin: 'auto',
@@ -45,47 +45,47 @@ const Login = () => {
     const validateEmail = () => {
 
         if (email.length === 0) {
-            setEmailnameValidation("Email can not be empty.")
+            setEmailValidation("Email can not be empty.")
             return false;
         }
         else if (email.length < 12) {
-            setEmailnameValidation("Email must have atleast 12 letters.");
+            setEmailValidation("Email must have atleast 12 letters.");
             return false;
         }
         else if (!email.includes("@")) {
-            setEmailnameValidation("Email must have '@'.");
+            setEmailValidation("Email must have '@'.");
             return false;
         }
         else if (!email.includes(".com")) {
-            setEmailnameValidation("Email must have '.com'.");
+            setEmailValidation("Email must have '.com'.");
             return false;
         }
         else if (email.split('@').length > 2) {
-            setEmailnameValidation("Email must have only 1 '@'.");
+            setEmailValidation("Email must have only 1 '@'.");
             return false;
         }
         else if (email.indexOf(".com") < email.length - 4) {
-            setEmailnameValidation("'.com' must be at the end of the email.");
+            setEmailValidation("'.com' must be at the end of the email.");
             return false;
         }
 
-        setEmailnameValidation(null);
+        setEmailValidation(null);
         return true;
     }
 
     const validatePassword = () => {
 
         if (password.length === 0) {
-            setPasswordnameValidation("Password can not be empty.")
+            setPasswordValidation("Password can not be empty.")
             return false;
         }
         else if (password.length < 6) {
-            setPasswordnameValidation("Password must have atleast 6 letters.");
+            setPasswordValidation("Password must have atleast 6 letters.");
             return false;
         }
 
 
-        setPasswordnameValidation(null);
+        setPasswordValidation(null);
         return true;
     }
 
