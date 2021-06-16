@@ -4,37 +4,50 @@ import EmployeeCard from '../components/EmployeeCard/EmployeeCard';
 import { useDispatch, useSelector } from 'react-redux';
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
+import Card from 'react-bootstrap/Card'
 
 const Login = () => {
+
+    const formLabelStyle = {
+        margin: 'auto',
+        color: 'blue'
+    }
+
+    const formControlStyle = {
+        width: '60%',
+        margin: 'auto'
+    }
+
 
     return (
         <div>
             <h2 align="left">Login</h2>
 
-            <div style={{ backgroundColor: 'white', fontFamily: 'arial', textAlign: 'left', boxShadow: '0px 5px 19px 3px #888888' }}>
+            <div style={{ boxShadow: '0px 5px 19px 3px #888888' }} >
+                <Card style={{ width: '40rem' }}>
+                    <Card.Body>
+                        <h4>Personal Details</h4>
+                        <br />
+                        <Form >
+                            <Form.Group controlId="formBasicEmail">
+                                <Form.Label style={formLabelStyle}>Email:</Form.Label>
+                                <Form.Control style={formControlStyle} maxLength="30" type="email" placeholder="Enter email" />
+                            </Form.Group>
 
-                <Form style={{ fontSize: '25px' }}>
-                    <Form.Group controlId="formBasicEmail">
-                        <Form.Label>Email</Form.Label>
-                        <Form.Control type="email" placeholder="Enter email" />
-                        <Form.Text className="text-muted">
-                            We'll never share your email with anyone else.
-                        </Form.Text>
-                    </Form.Group>
+                            <Form.Group controlId="formBasicPassword">
+                                <Form.Label style={formLabelStyle}>Password:</Form.Label>
+                                <Form.Control style={formControlStyle} maxLength="12" type="password" placeholder="Enter password" />
+                            </Form.Group>
+                            <Button variant="primary" type="submit">
+                                Sign In
+                            </Button>
+                        </Form>
+                    </Card.Body>
+                </Card>
 
-                    <Form.Group controlId="formBasicPassword">
-                        <Form.Label>Password</Form.Label>
-                        <Form.Control type="password" placeholder="Password" />
-                    </Form.Group>
-                    <Form.Group controlId="formBasicCheckbox">
-                        <Form.Check type="checkbox" label="Check me out" />
-                    </Form.Group>
-                    <Button variant="primary" type="submit">
-                        Submit
-                    </Button>
-                    
-                </Form>
             </div>
+            <br />
+            Don't have an account? Sign Up.
         </div>
     )
 
