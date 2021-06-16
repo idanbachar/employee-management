@@ -44,6 +44,15 @@
       "address": "Daniel",
       "role": "Programmer",
       "startDate": "Fri Jun 11 2021"
+    },
+    {
+      "id": "865f9566-253a-4a59-b32a-c35b17e778b7",
+      "firstname": "Lior",
+      "lastname": "Zemah",
+      "phone": "0421342142",
+      "address": "Balfour",
+      "role": "Programmer",
+      "startDate": "Sun Jun 20 2021"
     }
   ]
 }

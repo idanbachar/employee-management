@@ -63,11 +63,13 @@ const Manage = () => {
     return (
         <div>
             <h2 align="left">Managing Employees</h2>
+            <hr />
             <div align="right">
                 <Button variant="primary" onClick={() => setEmployeeModalShow(true)}>
                     + Add Employee
                 </Button>
             </div>
+            <br />
             <AddEmployee addEmployee={addEmployee} show={addEmployeeModalShow} onHide={() => setEmployeeModalShow(false)} />
 
             <div style={{ backgroundColor: 'white', fontSize: '18px', fontFamily: 'arial', textAlign: 'center', boxShadow: '0px 5px 19px 3px #888888' }}>
@@ -75,6 +77,7 @@ const Manage = () => {
                 <Table>
                     <thead>
                         <tr>
+                            <th></th>
                             <th>First Name</th>
                             <th>Last Name</th>
                             <th>Phone</th>

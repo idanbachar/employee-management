@@ -217,7 +217,8 @@ const Register = () => {
     return (
         <div>
             <h2 align="left">Register</h2>
-
+            <hr />
+            <br />
             <div style={{ boxShadow: '0px 5px 19px 3px #888888' }} >
                 <Card style={{ width: '40rem' }}>
                     <Card.Body>

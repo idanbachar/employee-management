@@ -61,6 +61,7 @@ const EditEmployee = (props) => {
     return (
         <div>
             <Button onClick={() => setModalShow(true)}><PencilFill /></Button>
+            &nbsp;
             <Button variant="danger" onClick={() => props.data.deleteHandler(props.data.id)}><TrashFill /></Button>
 
             <Modal show={modalShow} onHide={() => setModalShow(false)} aria-labelledby="contained-modal-title-vcenter">
