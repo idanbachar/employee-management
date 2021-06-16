@@ -8,6 +8,12 @@ import Card from 'react-bootstrap/Card'
 import axios from 'axios';
 import { SegmentedNav } from 'react-bootstrap-icons';
 import { validate } from 'uuid';
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+    Link
+} from 'react-router-dom'
 
 const api = axios.create({
     baseURL: `http://localhost:8000/auth/register`
