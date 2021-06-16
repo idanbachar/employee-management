@@ -1,16 +1,4 @@
 {
-  "users": [
-    {
-      "id": 1,
-      "firstname": "idan",
-      "lastname": "bachar",
-      "email": "idanac2@gmail.com",
-      "password": "password"
-    }
-  ],
-  "roles": [
-    {}
-  ],
   "employees": [
     {
       "id": "97760040-c926-49e3-ace1-50d902813357",

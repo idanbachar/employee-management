@@ -4,11 +4,13 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "json:server": "json-server --watch db.json"
+    "start": "json-server --watch db.json",
+    "start-auth": "node server.js"
   },
   "author": "",
   "license": "ISC",
-  "dependencies": {
-    "json-server": "^0.16.3"
+  "devDependencies": {
+    "json-server": "^0.15.1",
+    "json-server-auth": "^2.0.2"
   }
 }
