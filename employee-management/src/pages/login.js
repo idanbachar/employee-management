@@ -6,13 +6,20 @@ import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import Card from 'react-bootstrap/Card'
 import Register from '../pages/register';
+import axios from 'axios';
 
 import {
     BrowserRouter as Router,
     Switch,
     Route,
-    Link
+    Link,
+    Redirect
 } from 'react-router-dom'
+
+
+const api = axios.create({
+    baseURL: `http://localhost:8000/auth/login`
+})
 
 
 const Login = () => {
@@ -22,6 +29,9 @@ const Login = () => {
 
     const [emailValidation, setEmailValidation] = useState(null);
     const [passwordValidation, setPasswordValidation] = useState(null);
+
+    const user = useSelector(state => state.user);
+    const dispatch = useDispatch();
 
     const formLabelStyle = {
         margin: 'auto',
@@ -37,9 +47,31 @@ const Login = () => {
         const isEmailValid = validateEmail();
         const isPasswordValid = validatePassword();
 
-        return (isEmailValid &&
-            isPasswordValid
-        );
+        if (isEmailValid && isPasswordValid)
+            login();
+
+    }
+
+    const login = () => {
+
+        const data = {
+            email: email,
+            password: password
+        }
+
+        api.post(`/`, data).then(res => {
+
+            localStorage.setItem('token', res.data.access_token);
+
+            dispatch({
+                type: 'INIT',
+                payload: data
+            })
+            console.log(res);
+        }).catch(err => {
+            console.log(err);
+        })
+
     }
 
     const validateEmail = () => {
@@ -91,6 +123,9 @@ const Login = () => {
 
     return (
         <div>
+            <Route>
+                {user != null ? <Redirect to="/manage" /> : null}
+            </Route>
             <h2 align="left">Login</h2>
             <hr />
             <br />
@@ -120,10 +155,7 @@ const Login = () => {
 
             </div>
             <br />
-            <Router>
-                Don't have an account? <Link to="/register">Sign Up</Link>.
 
-            </Router>
 
         </div>
     )

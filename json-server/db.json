@@ -19,13 +19,22 @@
       "startDate": "Sun Jun 06 2021"
     },
     {
-      "id": "2d28e382-b8be-4fc6-8827-5beda8bf5cb3",
-      "firstname": "Ofek",
-      "lastname": "Sadlovski",
-      "phone": "0522223212",
-      "address": "Jerusalem",
-      "role": "HR",
-      "startDate": "Tue Jun 01 2021"
+      "id": "b4c99de8-f8c9-4645-adb1-4de98fa7d8cc",
+      "firstname": "Baruch",
+      "lastname": "Bachar",
+      "phone": "0524214121",
+      "address": "Balfour, Bat-Yam",
+      "role": "Programmer",
+      "startDate": "Wed Jun 02 2021"
+    },
+    {
+      "id": 2,
+      "firstname": "Shaked",
+      "lastname": "Ashkenazi",
+      "phone": "0552141204",
+      "address": "Tel Aviv",
+      "role": "Programmer",
+      "startDate": "Sat Jun 12 2021"
     }
   ]
 }

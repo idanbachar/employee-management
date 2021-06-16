@@ -43,7 +43,9 @@ const Register = () => {
         margin: 'auto'
     }
 
-    const validateFields = () => {
+    const validateFields = (e) => {
+
+        e.preventDefault();
 
         const isFirstNameValid = validateFirstname();
         const isLastNameValid = validateLastname();
@@ -51,11 +53,13 @@ const Register = () => {
         const isPasswordValid = validatePassword();
         const isRepasswordValid = validateRepassword();
 
-        return (isFirstNameValid &&
+        if (isFirstNameValid &&
             isLastNameValid &&
             isEmailValid &&
             isPasswordValid &&
-            isRepasswordValid);
+            isRepasswordValid) {
+            register();
+        }
     }
 
     const validateFirstname = () => {
@@ -200,18 +204,20 @@ const Register = () => {
     }
 
     const register = async () => {
-        const request = {
-            user: {
-                "id": 2,
-                "firstname": "rer",
-                "lastname": "afa",
-                "email": "afa@gmail.com",
-                "password": "gaga"
-            }
+
+        const data = {
+            firstname: firstname,
+            lastname: lastname,
+            email: email,
+            password: password
+
         };
 
-        const response = await api.post(`/`, request);
-        console.log(response);
+        api.post(`/`, data).then(res => {
+            console.log(res);
+        }).catch(err => {
+            console.log(err);
+        });
     }
 
     return (
@@ -254,7 +260,7 @@ const Register = () => {
                                 <div><font color="red">{repasswordValidation}</font></div>
                             </Form.Group>
 
-                            <Button onClick={() => validateFields()} variant="primary">
+                            <Button variant="primary" type="submit" onClick={validateFields}>
                                 Sign Up
                             </Button>
                         </Form>
@@ -263,8 +269,7 @@ const Register = () => {
 
             </div>
             <br />
-            Have an account? Sign In.
-        </div>
+        </div >
     )
 
 }

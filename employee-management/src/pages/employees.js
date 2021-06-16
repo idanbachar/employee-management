@@ -38,7 +38,7 @@ const Employees = () => {
             <br />
             <div style={{ backgroundColor: 'white', fontSize: '18px', fontFamily: 'arial', textAlign: 'center', boxShadow: '0px 5px 19px 3px #888888' }}>
                 <Table>
-                    <thead>
+                    <thead style={{ color: 'darkgray' }}>
                         <tr>
                             <th></th>
                             <th>First Name</th>

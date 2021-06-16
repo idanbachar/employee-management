@@ -36,6 +36,8 @@ server.post('/auth/register', (req, res) => {
     console.log(req.body);
     const { email, password } = req.body;
 
+    console.log("hello");
+
     if (isAuthenticated({ email, password }) === true) {
         const status = 401;
         const message = 'Email and Password already exist';
@@ -55,7 +57,7 @@ server.post('/auth/register', (req, res) => {
         var data = JSON.parse(data.toString());
 
         // Get the id of last user
-        var last_item_id = data.users[data.users.length - 1].id;
+        var last_item_id = data.users.length > 0 ? data.users[data.users.length - 1].id : 1;
 
         //Add new user
         data.users.push({ id: last_item_id + 1, email: email, password: password }); //add some data

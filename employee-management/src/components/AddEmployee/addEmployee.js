@@ -64,6 +64,7 @@ const AddEmployee = (props) => {
             isRoleValid) {
 
             const data = {
+                "id": 2,
                 "firstname": firstname,
                 "lastname": lastname,
                 "phone": phone,
