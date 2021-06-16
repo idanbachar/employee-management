@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Table from 'react-bootstrap/Table';
 import axios from 'axios';
 import EmployeeCard from '../components/EmployeeCard/EmployeeCard';
+import { useDispatch, useSelector } from 'react-redux';
 
 const api = axios.create({
     baseURL: `http://localhost:3000/employees`
@@ -10,6 +11,8 @@ const api = axios.create({
 const Employees = () => {
 
     const [employees, setEmployees] = useState([]);
+    const dispatch = useDispatch();
+
 
     useEffect(async () => {
         getEmployees();
@@ -18,7 +21,14 @@ const Employees = () => {
     const getEmployees = async () => {
         let data = await api.get('/')
             .then(({ data }) => data);
+
+        dispatch({
+            type: 'INIT',
+            payload: data
+        });
+
         setEmployees(data);
+
     }
 
     return (

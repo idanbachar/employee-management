@@ -24,7 +24,6 @@ const AddEmployee = (props) => {
         props.addEmployee(data);
     }
 
-
     return (
         <Modal {...props} aria-labelledby="contained-modal-title-vcenter">
             <Modal.Header closeButton>
@@ -63,7 +62,7 @@ const AddEmployee = (props) => {
                 </Container>
             </Modal.Body>
             <Modal.Footer>
-                <Button variant="success" onClick={() => validateData()}>Add Employee</Button>
+                <Button variant="success" onClick={() => validateData()}>Add</Button>
                 <Button variant="danger" onClick={props.onHide}>Cancel</Button>
             </Modal.Footer>
         </Modal >

@@ -7,6 +7,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { PencilFill, TrashFill } from 'react-bootstrap-icons';
 import Button from 'react-bootstrap/Button'
 import EmployeeCard from '../components/EmployeeCard/EmployeeCard';
+import { useDispatch, useSelector } from 'react-redux';
 
 const api = axios.create({
     baseURL: `http://localhost:3000/employees`
@@ -15,17 +16,25 @@ const api = axios.create({
 const Manage = () => {
 
     const [employees, setEmployees] = useState([]);
+    const employeeReducerState = useSelector(state => state.employee);
+    const dispatch = useDispatch();
+
     const [addEmployeeModalShow, setEmployeeModalShow] = useState(false);
     const [editEmployeeModalShow, setEditEmployeeModalShow] = useState(false);
 
     useEffect(async () => {
         getEmployees();
+
     }, [])
 
     const getEmployees = async () => {
         let data = await api.get('/')
             .then(({ data }) => data);
         setEmployees(data);
+        dispatch({
+            type: 'INIT',
+            payload: data
+        })
     }
 
     const deleteEmployee = async (id) => {
@@ -43,8 +52,13 @@ const Manage = () => {
         let updatedEmployees = [...employees];
         updatedEmployees.push(response.data);
         setEmployees(updatedEmployees);
+        dispatch({
+            type: 'ADD',
+            payload: updatedEmployees
+        })
         setEmployeeModalShow(false);
     }
+
 
     return (
         <div>
@@ -73,6 +87,7 @@ const Manage = () => {
                     <tbody>
                         {employees.map(employee =>
                             <EmployeeCard
+                                id={employee.id}
                                 firstname={employee.firstname}
                                 lastname={employee.lastname}
                                 phone={employee.phone}
@@ -80,7 +95,8 @@ const Manage = () => {
                                 roll={employee.roll}
                                 startdate={employee.startdate}
                                 isEditable={true}
-                                deleteHandler={() => deleteEmployee(employee.id)} />
+                                deleteHandler={() => deleteEmployee(employee.id)}
+                            />
                         )}
                     </tbody>
                 </Table>

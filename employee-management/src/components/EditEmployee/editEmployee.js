@@ -4,6 +4,13 @@ import Container from 'react-bootstrap/Container'
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
 import { ArrowRight, PencilFill, TrashFill } from 'react-bootstrap-icons';
+import { useDispatch, useSelector } from 'react-redux';
+import axios from 'axios';
+
+
+const api = axios.create({
+    baseURL: `http://localhost:3000/employees`
+})
 
 const EditEmployee = (props) => {
 
@@ -13,6 +20,32 @@ const EditEmployee = (props) => {
     const [address, setAddress] = useState(props.data.address);
 
     const [modalShow, setModalShow] = React.useState(false);
+    const dispatch = useDispatch();
+
+    const setNewInfo = () => {
+
+        const updatedData = {
+            "id": props.data.id,
+            "firstname": firstname,
+            "lastname": lastname,
+            "phone": phone,
+            "address": address,
+            "roll": props.data.roll,
+            "startdate": props.data.startdate
+        }
+        updateEmployee(updatedData);
+    }
+
+    const updateEmployee = async (employee) => {
+        const response = await api.put(`/${employee.id}`, employee);
+        const { id } = response.data;
+
+        dispatch({
+            type: 'UPDATE',
+            payload: employee
+        })
+        setModalShow(false);
+    }
 
     return (
         <div>
@@ -23,7 +56,7 @@ const EditEmployee = (props) => {
                 <Modal.Header closeButton>
                     <Modal.Title id="contained-modal-title-vcenter">
                         Edit Employee
-              </Modal.Title>
+                    </Modal.Title>
                 </Modal.Header>
                 <Modal.Body className="show-grid">
                     <Container>
@@ -54,14 +87,11 @@ const EditEmployee = (props) => {
                     </Container>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button variant="success" >Edit Employee</Button>
+                    <Button variant="success" onClick={() => setNewInfo()} >Update</Button>
                     <Button variant="danger" onClick={() => setModalShow(false)}>Cancel</Button>
                 </Modal.Footer>
             </Modal >
-
         </div>
-
-
     );
 }
 
