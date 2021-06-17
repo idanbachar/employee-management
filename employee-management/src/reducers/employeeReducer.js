@@ -15,6 +15,7 @@ const employeeReducer = (state = initialState, action) => {
             const employeeIndex = employees.findIndex(employee => {
                 return employee.id === action.payload.id;
             });
+
             employees[employeeIndex].firstname = action.payload.firstname;
             employees[employeeIndex].lastname = action.payload.lastname;
             employees[employeeIndex].phone = action.payload.phone;

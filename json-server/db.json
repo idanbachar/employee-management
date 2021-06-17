@@ -28,13 +28,48 @@
       "startDate": "Sun Jun 06 2021"
     },
     {
-      "id": 2,
-      "firstname": "Moshe",
-      "lastname": "Nesher",
-      "phone": "0521312321",
-      "address": "Bait A Compim, Bat-Yam",
+      "id": "54c6584f-1b9b-4d79-9bc7-f604c3abdfa1",
+      "firstname": "Tony",
+      "lastname": "Stark",
+      "phone": "0522323232",
+      "address": "New York",
+      "role": "Programmer",
+      "startDate": "Wed Apr 28 2021"
+    },
+    {
+      "id": "3abf23c5-7e04-463e-8efb-6b7e24d3631f",
+      "firstname": "Maor",
+      "lastname": "Shvartz",
+      "phone": "0502312313",
+      "address": "Oranit",
       "role": "Data Analyst",
-      "startDate": "Sun May 30 2021"
+      "startDate": "Mon May 31 2021"
+    }
+  ],
+  "users": [
+    {
+      "firstname": "idan",
+      "lastname": "bachar",
+      "email": "idanac2@gmail.com",
+      "id": 1
+    },
+    {
+      "firstname": "gleb",
+      "lastname": "kuga",
+      "email": "gleb@gmail.com",
+      "id": 2
+    },
+    {
+      "firstname": "gaga",
+      "lastname": "baba",
+      "email": "gaga@gmail.com",
+      "id": 3
+    },
+    {
+      "firstname": "nimrod",
+      "lastname": "harel",
+      "email": "nimrod@walla.com",
+      "id": 4
     }
   ]
 }

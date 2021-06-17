@@ -75,9 +75,20 @@ const Login = () => {
         api.post(`/`, data).then(res => {
 
             localStorage.setItem("isLogin", JSON.stringify(data));
-            window.location.href = "/manage";
-
             console.log(res);
+
+            axios.get(`http://localhost:3000/users?email=${email}`).then(res => {
+
+                const userData = res.data[0];
+                localStorage.setItem("userData", JSON.stringify(userData));
+                console.log(userData);
+
+                window.location.href = "/manage";
+
+            }).catch(err => {
+                console.log(err);
+            })
+
         }).catch(err => {
             setPasswordValidation("Invalid email or password.");
             console.log(err);

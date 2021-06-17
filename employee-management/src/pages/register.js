@@ -235,9 +235,28 @@ const Register = () => {
         api.post(`/`, data).then(res => {
 
             localStorage.setItem("isLogin", JSON.stringify(data));
-            window.location.href = "/manage";
+
+            const userData = {
+                firstname: firstname,
+                lastname: lastname,
+                email: email
+            }
 
             console.log(res);
+
+            localStorage.setItem("userData", JSON.stringify(userData));
+
+            const request = userData;
+            axios.post("http://localhost:3000/users", request).then((response => {
+                console.log(response);
+
+                window.location.href = "/manage";
+            })).catch(err => {
+                console.log(err);
+            });
+
+
+
 
         }).catch(err => {
             setEmailValidation("Current email is being used by other user.");

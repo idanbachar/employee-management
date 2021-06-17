@@ -9,7 +9,6 @@ import "react-datepicker/dist/react-datepicker.css";
 import { PencilFill, TrashFill } from 'react-bootstrap-icons';
 import { useDispatch } from 'react-redux';
 import axios from 'axios';
-import { validate } from 'uuid';
 
 
 const api = axios.create({
@@ -18,6 +17,7 @@ const api = axios.create({
 
 const EditEmployee = (props) => {
 
+    const [id, setId] = useState(props.data.id);
     const [firstname, setFirstName] = useState(props.data.firstname);
     const [lastname, setLastName] = useState(props.data.lastname);
     const [phone, setPhone] = useState(props.data.phone);
@@ -81,7 +81,7 @@ const EditEmployee = (props) => {
             isRoleValid) {
 
             const updatedData = {
-                "id": props.data.id,
+                "id": id,
                 "firstname": firstname,
                 "lastname": lastname,
                 "phone": phone,
@@ -200,8 +200,8 @@ const EditEmployee = (props) => {
 
     const updateEmployee = async (employee) => {
         const response = await api.put(`/${employee.id}`, employee);
-        const { id } = response.data;
 
+        console.log(response);
         dispatch({
             type: 'UPDATE',
             payload: employee

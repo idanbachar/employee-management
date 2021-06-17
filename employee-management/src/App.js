@@ -20,21 +20,23 @@ function App() {
 
     localStorage.clear();
     window.location.reload();
-    // dispatch({
-    //   type: 'LOGOUT',
-    //   payload: null
-    // })
   }
+
 
   return (
 
     <div className="App">
-
       <Router>
         <Navbar bg="light" variant="light" style={{ boxShadow: '0px 2px 29px 1px #888888' }}>
           <Navbar.Brand><img src="https://ls-techs.com/wp-content/uploads/2019/07/logo.png" /></Navbar.Brand>
-          <Nav fill variant="tabs" defaultActiveKey="/home">
+          <Nav fill variant="tabs" defaultActiveKey="/manage">
             <Nav.Item>
+              {localStorage.getItem("userData") !== null ?
+                <p>Welcome {
+                  JSON.parse(localStorage.getItem("userData")).firstname + " " +
+                  JSON.parse(localStorage.getItem("userData")).lastname}!</p>
+                : null
+              }
               {
                 localStorage.getItem("isLogin") !== null ?
                   <Nav>
@@ -49,16 +51,12 @@ function App() {
                       <Nav.Link eventKey="link-5">
                         <Link to="/employees">Employees</Link>
                       </Nav.Link>
-
-
                     </Nav.Item>
                   </Nav>
                   : null}
-
             </Nav.Item>
           </Nav>
         </Navbar>
-
         <header className="App-header">
           <div>
 
