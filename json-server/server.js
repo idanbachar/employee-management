@@ -35,13 +35,18 @@ function isAuthenticated({ email, password }) {
     return userdb.users.findIndex(user => user.email === email && user.password === password) !== -1
 }
 
+function isEmailExisted({ email }) {
+    userdb = JSON.parse(fs.readFileSync('./users.json', 'UTF-8'));
+    return userdb.users.findIndex(user => user.email === email) !== -1
+}
+
 // Register New User
 server.post('/auth/register', (req, res) => {
     console.log("register endpoint called; request body:");
     console.log(req.body);
     const { email, password, firstname, lastname } = req.body;
 
-    if (isAuthenticated({ email, password }) === true) {
+    if (isEmailExisted({ email }) === true) {
         const status = 401;
         const message = 'Email and Password already exist';
         res.status(status).json({ status, message });
