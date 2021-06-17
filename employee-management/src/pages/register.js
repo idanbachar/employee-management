@@ -61,13 +61,13 @@ const Register = () => {
         margin: 'auto'
     }
 
-    const validateFields = (isFlag) => {
+    const validateFields = (isFlag, lang) => {
 
-        const isFirstNameValid = validateFirstname();
-        const isLastNameValid = validateLastname();
-        const isEmailValid = validateEmail();
-        const isPasswordValid = validatePassword();
-        const isRepasswordValid = validateRepassword();
+        const isFirstNameValid = validateFirstname(lang);
+        const isLastNameValid = validateLastname(lang);
+        const isEmailValid = validateEmail(lang);
+        const isPasswordValid = validatePassword(lang);
+        const isRepasswordValid = validateRepassword(lang);
 
         if (isFlag) {
             if (isFirstNameValid &&
@@ -75,23 +75,23 @@ const Register = () => {
                 isEmailValid &&
                 isPasswordValid &&
                 isRepasswordValid) {
-                register();
+                handleRegister();
             }
         }
     }
 
-    const validateFirstname = () => {
+    const validateFirstname = (lang) => {
 
         if (firstname.length === 0) {
-            setFirstnameValidation(FormLanguages.register.validationErrors.inputs.firstname[language][0].message);
+            setFirstnameValidation(FormLanguages.register.validationErrors.inputs.firstname[lang][0].message);
             return false;
         }
         else if (firstname.length === 1) {
-            setFirstnameValidation(FormLanguages.register.validationErrors.inputs.firstname[language][1].message);
+            setFirstnameValidation(FormLanguages.register.validationErrors.inputs.firstname[lang][1].message);
             return false;
         }
         else if (isContainsNumber(firstname)) {
-            setFirstnameValidation(FormLanguages.register.validationErrors.inputs.firstname[language][2].message);
+            setFirstnameValidation(FormLanguages.register.validationErrors.inputs.firstname[lang][2].message);
             return false;
         }
 
@@ -99,18 +99,18 @@ const Register = () => {
         return true;
     }
 
-    const validateLastname = () => {
+    const validateLastname = (lang) => {
 
         if (lastname.length === 0) {
-            setLastnameValidation(FormLanguages.register.validationErrors.inputs.lastname[language][0].message);
+            setLastnameValidation(FormLanguages.register.validationErrors.inputs.lastname[lang][0].message);
             return false;
         }
         else if (lastname.length === 1) {
-            setLastnameValidation(FormLanguages.register.validationErrors.inputs.lastname[language][1].message);
+            setLastnameValidation(FormLanguages.register.validationErrors.inputs.lastname[lang][1].message);
             return false;
         }
         else if (isContainsNumber(lastname)) {
-            setLastnameValidation(FormLanguages.register.validationErrors.inputs.lastname[language][2].message);
+            setLastnameValidation(FormLanguages.register.validationErrors.inputs.lastname[lang][2].message);
             return false;
         }
 
@@ -118,31 +118,31 @@ const Register = () => {
         return true;
     }
 
-    const validateEmail = () => {
+    const validateEmail = (lang) => {
 
         if (email.length === 0) {
 
-            setEmailValidation(FormLanguages.register.validationErrors.inputs.email[language][0].message);
+            setEmailValidation(FormLanguages.register.validationErrors.inputs.email[lang][0].message);
             return false;
         }
         else if (email.length < 12) {
-            setEmailValidation(FormLanguages.register.validationErrors.inputs.email[language][1].message);
+            setEmailValidation(FormLanguages.register.validationErrors.inputs.email[lang][1].message);
             return false;
         }
         else if (!email.includes("@")) {
-            setEmailValidation(FormLanguages.register.validationErrors.inputs.email[language][2].message);
+            setEmailValidation(FormLanguages.register.validationErrors.inputs.email[lang][2].message);
             return false;
         }
         else if (!email.includes(".com")) {
-            setEmailValidation(FormLanguages.register.validationErrors.inputs.email[language][3].message);
+            setEmailValidation(FormLanguages.register.validationErrors.inputs.email[lang][3].message);
             return false;
         }
         else if (email.split('@').length > 2) {
-            setEmailValidation(FormLanguages.register.validationErrors.inputs.email[language][4].message);
+            setEmailValidation(FormLanguages.register.validationErrors.inputs.email[lang][4].message);
             return false;
         }
         else if (email.indexOf(".com") < email.length - 4) {
-            setEmailValidation(FormLanguages.register.validationErrors.inputs.email[language][5].message);
+            setEmailValidation(FormLanguages.register.validationErrors.inputs.email[lang][5].message);
             return false;
         }
 
@@ -150,22 +150,22 @@ const Register = () => {
         return true;
     }
 
-    const validatePassword = () => {
+    const validatePassword = (lang) => {
 
         if (password.length === 0) {
-            setPasswordValidation(FormLanguages.register.validationErrors.inputs.password[language][0].message);
+            setPasswordValidation(FormLanguages.register.validationErrors.inputs.password[lang][0].message);
             return false;
         }
         else if (password.length < 6) {
-            setPasswordValidation(FormLanguages.register.validationErrors.inputs.password[language][1].message);
+            setPasswordValidation(FormLanguages.register.validationErrors.inputs.password[lang][1].message);
             return false;
         }
         else if (!isContainsNumber(password)) {
-            setPasswordValidation(FormLanguages.register.validationErrors.inputs.password[language][2].message);
+            setPasswordValidation(FormLanguages.register.validationErrors.inputs.password[lang][2].message);
             return false;
         }
         else if (!isContainsLetter(password)) {
-            setPasswordValidation(FormLanguages.register.validationErrors.inputs.password[language][3].message);
+            setPasswordValidation(FormLanguages.register.validationErrors.inputs.password[lang][3].message);
             return false;
         }
 
@@ -173,27 +173,27 @@ const Register = () => {
         return true;
     }
 
-    const validateRepassword = () => {
+    const validateRepassword = (lang) => {
 
         if (repassword.length === 0) {
-            setRepasswordValidation(FormLanguages.register.validationErrors.inputs.repassword[language][0].message);
+            setRepasswordValidation(FormLanguages.register.validationErrors.inputs.repassword[lang][0].message);
             return false;
         }
         else if (repassword.length < 6) {
-            setRepasswordValidation(FormLanguages.register.validationErrors.inputs.repassword[language][1].message);
+            setRepasswordValidation(FormLanguages.register.validationErrors.inputs.repassword[lang][1].message);
             return false;
         }
         else if (!isContainsNumber(repassword)) {
-            setRepasswordValidation(FormLanguages.register.validationErrors.inputs.repassword[language][2].message);
+            setRepasswordValidation(FormLanguages.register.validationErrors.inputs.repassword[lang][2].message);
             return false;
         }
         else if (!isContainsLetter(repassword)) {
-            setRepasswordValidation(FormLanguages.register.validationErrors.inputs.repassword[language][3].message);
+            setRepasswordValidation(FormLanguages.register.validationErrors.inputs.repassword[lang][3].message);
             return false;
         }
 
         if (repassword !== password) {
-            setRepasswordValidation(FormLanguages.register.validationErrors.inputs.repassword[language][4].message);
+            setRepasswordValidation(FormLanguages.register.validationErrors.inputs.repassword[lang][4].message);
             return false;
         }
 
@@ -222,7 +222,7 @@ const Register = () => {
         return false;
     }
 
-    const register = async () => {
+    const handleRegister = async () => {
 
         const data = {
             firstname: firstname,
@@ -244,17 +244,19 @@ const Register = () => {
         });
     }
 
-    const changeLanguage = () => {
-        setTitle(FormLanguages.register.labels.title[language]);
-        setMainLabel(FormLanguages.register.labels.main[language]);
-        setFirstnameFieldLabel(FormLanguages.register.labels.fields[language][0].message);
-        setLastnameFieldLabel(FormLanguages.register.labels.fields[language][1].message);
-        setEmailFieldLabel(FormLanguages.register.labels.fields[language][2].message);
-        setPasswordFieldLabel(FormLanguages.register.labels.fields[language][3].message);
-        setRePasswordFieldLabel(FormLanguages.register.labels.fields[language][4].message);
-        setSubmitButtonLabel(FormLanguages.register.labels.submit[language]);
+    const changeLanguage = (lang) => {
 
-        validateFields(false);
+        setTitle(FormLanguages.register.labels.title[lang]);
+        setMainLabel(FormLanguages.register.labels.main[lang]);
+        setFirstnameFieldLabel(FormLanguages.register.labels.fields[lang][0].message);
+        setLastnameFieldLabel(FormLanguages.register.labels.fields[lang][1].message);
+        setEmailFieldLabel(FormLanguages.register.labels.fields[lang][2].message);
+        setPasswordFieldLabel(FormLanguages.register.labels.fields[lang][3].message);
+        setRePasswordFieldLabel(FormLanguages.register.labels.fields[lang][4].message);
+        setSubmitButtonLabel(FormLanguages.register.labels.submit[lang]);
+        setLanguage(lang);
+
+        validateFields(false, lang);
     }
 
     return (
@@ -267,20 +269,15 @@ const Register = () => {
             <h2 align="left">{title}</h2>
             <hr />
             <div>
-                <table width="200">
+                <table width="100">
                     <tr>
                         <td>
                             <Select
                                 label="Select language"
                                 options={languages}
                                 defaultValue={languages[0]}
-                                onChange={(e) => setLanguage(e.value)}
+                                onChange={(e) => changeLanguage(e.value)}
                             />
-                        </td>
-                        <td>
-                            <Button onClick={changeLanguage}>
-                                Update
-                            </Button>
                         </td>
                     </tr>
                 </table>
@@ -320,7 +317,7 @@ const Register = () => {
                                 <div><font color="red">{repasswordValidation}</font></div>
                             </Form.Group>
 
-                            <Button variant="primary" onClick={() => validateFields(true)}>
+                            <Button variant="primary" onClick={() => validateFields(true, language)}>
                                 {submitButtonLabel}
                             </Button>
                         </Form>

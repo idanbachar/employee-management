@@ -54,10 +54,10 @@ const Login = () => {
         width: '60%',
         margin: 'auto'
     }
-    const validateFields = (isFlag) => {
+    const validateFields = (isFlag, lang) => {
 
-        const isEmailValid = validateEmail();
-        const isPasswordValid = validatePassword();
+        const isEmailValid = validateEmail(lang);
+        const isPasswordValid = validatePassword(lang);
 
         if (isFlag) {
             if (isEmailValid && isPasswordValid)
@@ -85,31 +85,31 @@ const Login = () => {
 
     }
 
-    const validateEmail = () => {
+    const validateEmail = (lang) => {
 
         if (email.length === 0) {
 
-            setEmailValidation(FormLanguages.login.validationErrors.inputs.email[language][0].message)
+            setEmailValidation(FormLanguages.login.validationErrors.inputs.email[lang][0].message)
             return false;
         }
         else if (email.length < 12) {
-            setEmailValidation(FormLanguages.login.validationErrors.inputs.email[language][1].message)
+            setEmailValidation(FormLanguages.login.validationErrors.inputs.email[lang][1].message)
             return false;
         }
         else if (!email.includes("@")) {
-            setEmailValidation(FormLanguages.login.validationErrors.inputs.email[language][2].message)
+            setEmailValidation(FormLanguages.login.validationErrors.inputs.email[lang][2].message)
             return false;
         }
         else if (!email.includes(".com")) {
-            setEmailValidation(FormLanguages.login.validationErrors.inputs.email[language][3].message)
+            setEmailValidation(FormLanguages.login.validationErrors.inputs.email[lang][3].message)
             return false;
         }
         else if (email.split('@').length > 2) {
-            setEmailValidation(FormLanguages.login.validationErrors.inputs.email[language][4].message)
+            setEmailValidation(FormLanguages.login.validationErrors.inputs.email[lang][4].message)
             return false;
         }
         else if (email.indexOf(".com") < email.length - 4) {
-            setEmailValidation(FormLanguages.login.validationErrors.inputs.email[language][5].message)
+            setEmailValidation(FormLanguages.login.validationErrors.inputs.email[lang][5].message)
             return false;
         }
 
@@ -117,14 +117,14 @@ const Login = () => {
         return true;
     }
 
-    const validatePassword = () => {
+    const validatePassword = (lang) => {
 
         if (password.length === 0) {
-            setPasswordValidation(FormLanguages.login.validationErrors.inputs.password[language][0].message)
+            setPasswordValidation(FormLanguages.login.validationErrors.inputs.password[lang][0].message)
             return false;
         }
         else if (password.length < 6) {
-            setPasswordValidation(FormLanguages.login.validationErrors.inputs.password[language][1].message);
+            setPasswordValidation(FormLanguages.login.validationErrors.inputs.password[lang][1].message);
             return false;
         }
 
@@ -132,14 +132,16 @@ const Login = () => {
         return true;
     }
 
-    const changeLanguage = () => {
-        setTitle(FormLanguages.login.labels.title[language]);
-        setMainLabel(FormLanguages.login.labels.main[language]);
-        setEmailFieldLabel(FormLanguages.login.labels.fields[language][0].message);
-        setPasswordFieldLabel(FormLanguages.login.labels.fields[language][1].message);
-        setSubmitButtonLabel(FormLanguages.login.labels.submit[language]);
+    const changeLanguage = (lang) => {
 
-        validateFields(false);
+        setTitle(FormLanguages.login.labels.title[lang]);
+        setMainLabel(FormLanguages.login.labels.main[lang]);
+        setEmailFieldLabel(FormLanguages.login.labels.fields[lang][0].message);
+        setPasswordFieldLabel(FormLanguages.login.labels.fields[lang][1].message);
+        setSubmitButtonLabel(FormLanguages.login.labels.submit[lang]);
+        setLanguage(lang);
+
+        validateFields(false, lang);
     }
 
     return (
@@ -153,20 +155,15 @@ const Login = () => {
             <h2 align="left">{title}</h2>
             <hr />
             <div>
-                <table width="200">
+                <table width="100">
                     <tr>
                         <td>
                             <Select
                                 label="Select language"
                                 options={languages}
                                 defaultValue={languages[0]}
-                                onChange={(e) => setLanguage(e.value)}
+                                onChange={(e) => changeLanguage(e.value)}
                             />
-                        </td>
-                        <td>
-                            <Button onClick={changeLanguage}>
-                                Update
-                            </Button>
                         </td>
                     </tr>
                 </table>
@@ -190,7 +187,7 @@ const Login = () => {
                                 <Form.Control style={formControlStyle} maxLength="12" type="password" placeholder="Enter password" onChange={(e) => { setPassword(e.target.value) }} />
                                 <div><font color="red">{passwordValidation}</font></div>
                             </Form.Group>
-                            <Button onClick={() => validateFields(true)} variant="primary">
+                            <Button onClick={() => validateFields(true, language)} variant="primary">
                                 {submitButtonLabel}
                             </Button>
                         </Form>
