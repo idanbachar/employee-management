@@ -5,7 +5,7 @@ const jwt = require('jsonwebtoken')
 
 const server = jsonServer.create()
 const router = jsonServer.router('./db.json')
-const userdb = JSON.parse(fs.readFileSync('./users.json', 'UTF-8'))
+let userdb = JSON.parse(fs.readFileSync('./users.json', 'UTF-8'))
 
 server.use(bodyParser.urlencoded({ extended: true }))
 server.use(bodyParser.json())
@@ -27,6 +27,11 @@ function verifyToken(token) {
 
 // Check if the user exists in database
 function isAuthenticated({ email, password }) {
+
+    for (let i = 0; i < userdb.users.length; i++) {
+        console.log(userdb.users[i].email + " , " + userdb.users[i].password + "---" + email + " , " + password + "-----" + userdb.users.findIndex(user => user.email === email && user.password === password))
+    }
+    userdb = JSON.parse(fs.readFileSync('./users.json', 'UTF-8'));
     return userdb.users.findIndex(user => user.email === email && user.password === password) !== -1
 }
 
@@ -118,6 +123,6 @@ server.use(/^(?!\/auth).*$/, (req, res, next) => {
 
 server.use(router)
 
-server.listen(8000, () => {
+server.listen(3000, () => {
     console.log('Run Auth API Server')
 })

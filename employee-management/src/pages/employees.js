@@ -19,7 +19,14 @@ const Employees = () => {
     }, [])
 
     const getEmployees = async () => {
-        let data = await api.get('/')
+
+        const config = {
+            headers: {
+                Authorization: 'Bearer ' + localStorage.getItem("token")
+            }
+        }
+
+        let data = await api.get('/', config)
             .then(({ data }) => data);
 
         dispatch({

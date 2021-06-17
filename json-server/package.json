@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "json-server --watch db.json",
+    "start": "json-server --watch ./db.json",
     "start-auth": "node server.js"
   },
   "author": "",
@@ -12,5 +12,8 @@
   "devDependencies": {
     "json-server": "^0.15.1",
     "json-server-auth": "^2.0.2"
+  },
+  "dependencies": {
+    "jsonwebtoken": "^8.5.1"
   }
 }

@@ -15,7 +15,7 @@ import {
 } from 'react-router-dom'
 
 const api = axios.create({
-    baseURL: `http://localhost:8000/auth/register`
+    baseURL: `http://localhost:3000/`
 })
 
 const Register = () => {
@@ -232,29 +232,24 @@ const Register = () => {
 
         };
 
-        api.post(`/`, data).then(res => {
+        api.post(`/auth/register`, data).then(res => {
 
-            localStorage.setItem("isLogin", JSON.stringify(data));
-
-            const userData = {
-                firstname: firstname,
-                lastname: lastname,
-                email: email
-            }
 
             console.log(res);
 
-            localStorage.setItem("userData", JSON.stringify(userData));
+            const access_token = res.data.access_token;
+            const config = {
+                headers: {
+                    Authorization: 'Bearer ' + access_token
+                }
+            }
 
-            const request = userData;
-            axios.post("http://localhost:3000/users", request).then((response => {
-                console.log(response);
-
-                window.location.href = "/manage";
-            })).catch(err => {
-                console.log(err);
-            });
-
+            api.post(`/users`, data, config).then(result => {
+                console.log(result);
+                window.location.href = "/login";
+            }).catch(error => {
+                console.log(error);
+            })
 
 
 

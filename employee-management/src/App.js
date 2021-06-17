@@ -38,7 +38,7 @@ function App() {
                 <Nav.Link href="#" eventKey="link-2"><Link to="/employees">My Employees</Link></Nav.Link>
               </Nav>
               : null}
-            {localStorage.getItem("userData") !== null ?
+            {localStorage.getItem("userData") !== null && localStorage.getItem("userData") !== undefined ?
               <Nav>
                 <table>
                   <tr>
@@ -59,8 +59,6 @@ function App() {
 
               : null
             }
-
-
           </Navbar.Collapse>
         </Navbar>
 
@@ -103,6 +101,9 @@ function App() {
           </div>
         </header>
       </Router>
+      <div style={{ textAlign: "center" }}>
+        <u>Our Terms of Use and Privacy Policy</u>
+      </div>
     </div >
   );
 }

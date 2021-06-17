@@ -14,9 +14,8 @@ import {
 } from 'react-router-dom'
 
 const api = axios.create({
-    baseURL: `http://localhost:8000/auth/login`
+    baseURL: `http://localhost:3000/`
 })
-
 
 const Login = () => {
 
@@ -72,21 +71,30 @@ const Login = () => {
             password: password
         }
 
-        api.post(`/`, data).then(res => {
+        api.post(`/auth/login`, data).then(res => {
 
             localStorage.setItem("isLogin", JSON.stringify(data));
+            const access_token = res.data.access_token;
+            localStorage.setItem('token', access_token);
+
             console.log(res);
 
-            axios.get(`http://localhost:3000/users?email=${email}`).then(res => {
+            const config = {
+                headers: {
+                    Authorization: 'Bearer ' + access_token
+                }
+            }
 
-                const userData = res.data[0];
+            api.get(`/users?email=${email}`, config).then(result => {
+
+                const userData = result.data[0];
                 localStorage.setItem("userData", JSON.stringify(userData));
                 console.log(userData);
 
                 window.location.href = "/manage";
 
-            }).catch(err => {
-                console.log(err);
+            }).catch(error => {
+                console.log(error);
             })
 
         }).catch(err => {

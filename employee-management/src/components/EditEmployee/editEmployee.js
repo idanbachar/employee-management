@@ -199,7 +199,14 @@ const EditEmployee = (props) => {
 
 
     const updateEmployee = async (employee) => {
-        const response = await api.put(`/${employee.id}`, employee);
+
+        const config = {
+            headers: {
+                Authorization: 'Bearer ' + localStorage.getItem("token")
+            }
+        }
+
+        const response = await api.put(`/${employee.id}`, employee, config);
 
         console.log(response);
         dispatch({

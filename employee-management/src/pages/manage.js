@@ -15,6 +15,12 @@ const api = axios.create({
 
 const Manage = () => {
 
+    const config = {
+        headers: {
+            Authorization: 'Bearer ' + localStorage.getItem("token")
+        }
+    }
+
     const [employees, setEmployees] = useState([]);
     const employeeReducerState = useSelector(state => state.employee);
     const dispatch = useDispatch();
@@ -28,7 +34,8 @@ const Manage = () => {
     }, [])
 
     const getEmployees = async () => {
-        let data = await api.get('/')
+
+        let data = await api.get('/', config)
             .then(({ data }) => data);
 
         setEmployees(data);
@@ -39,7 +46,7 @@ const Manage = () => {
     }
 
     const deleteEmployee = async (id) => {
-        let data = await api.delete(`/${id}`);
+        let data = await api.delete(`/${id}`, config);
         getEmployees();
     }
 
@@ -49,7 +56,7 @@ const Manage = () => {
             ...employee
         };
 
-        const response = await api.post(`/`, request);
+        const response = await api.post(`/`, request, config);
         let updatedEmployees = [...employees];
         updatedEmployees.push(response.data);
         setEmployees(updatedEmployees);

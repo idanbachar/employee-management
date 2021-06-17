@@ -37,39 +37,22 @@
       "startDate": "Wed Apr 28 2021"
     },
     {
-      "id": "3abf23c5-7e04-463e-8efb-6b7e24d3631f",
+      "id": "e8c105e1-c08e-41ea-a8dc-df43c94d4801",
       "firstname": "Maor",
       "lastname": "Shvartz",
-      "phone": "0502312313",
+      "phone": "0502123123",
       "address": "Oranit",
-      "role": "Data Analyst",
+      "role": "Programmer",
       "startDate": "Mon May 31 2021"
     }
   ],
   "users": [
     {
-      "firstname": "idan",
-      "lastname": "bachar",
+      "firstname": "Idan",
+      "lastname": "Bachar",
       "email": "idanac2@gmail.com",
+      "password": "i123456",
       "id": 1
-    },
-    {
-      "firstname": "gleb",
-      "lastname": "kuga",
-      "email": "gleb@gmail.com",
-      "id": 2
-    },
-    {
-      "firstname": "gaga",
-      "lastname": "baba",
-      "email": "gaga@gmail.com",
-      "id": 3
-    },
-    {
-      "firstname": "nimrod",
-      "lastname": "harel",
-      "email": "nimrod@walla.com",
-      "id": 4
     }
   ]
 }
