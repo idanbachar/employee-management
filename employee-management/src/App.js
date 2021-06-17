@@ -5,6 +5,7 @@ import Manage from './pages/manage';
 import Employees from './pages/employees';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav'
+import { DoorClosed, DoorClosedFill, DoorOpen, PencilFill } from 'react-bootstrap-icons';
 
 import {
   BrowserRouter as Router,
@@ -27,36 +28,42 @@ function App() {
 
     <div className="App">
       <Router>
-        <Navbar bg="light" variant="light" style={{ boxShadow: '0px 2px 29px 1px #888888' }}>
-          <Navbar.Brand><img src="https://ls-techs.com/wp-content/uploads/2019/07/logo.png" /></Navbar.Brand>
-          <Nav fill variant="tabs" defaultActiveKey="/manage">
-            <Nav.Item>
-              {localStorage.getItem("userData") !== null ?
-                <p>Welcome {
-                  JSON.parse(localStorage.getItem("userData")).firstname + " " +
-                  JSON.parse(localStorage.getItem("userData")).lastname}!</p>
-                : null
-              }
-              {
-                localStorage.getItem("isLogin") !== null ?
-                  <Nav>
-                    <Nav.Link eventKey="link-3">
-                      <Link to="/login" onClick={logout}>Logout</Link>
-                    </Nav.Link>
-                    <Nav.Link eventKey="link-4">
-                      <Link to="/manage">Manage</Link>
-                    </Nav.Link>
+        <Navbar bg="light" expand="lg">
+          <Navbar.Brand href="#"><img src="https://ls-techs.com/wp-content/uploads/2019/07/logo.png" /></Navbar.Brand>
+          <Navbar.Toggle aria-controls="basic-navbar-nav" />
+          <Navbar.Collapse id="basic-navbar-nav">
+            {localStorage.getItem("isLogin") !== null ?
+              <Nav variant className="mr-auto">
+                <Nav.Link href="#" eventKey="link-1"><Link to="/manage">Manage</Link></Nav.Link>
+                <Nav.Link href="#" eventKey="link-2"><Link to="/employees">My Employees</Link></Nav.Link>
+              </Nav>
+              : null}
+            {localStorage.getItem("userData") !== null ?
+              <Nav>
+                <table>
+                  <tr>
+                    <td>
+                      <img width="30" src="https://cdn.icon-icons.com/icons2/1736/PNG/512/4043260-avatar-male-man-portrait_113269.png" />
+                    </td>
+                    <td>
+                      {
+                        JSON.parse(localStorage.getItem("userData")).firstname + " " +
+                        JSON.parse(localStorage.getItem("userData")).lastname}
+                    </td>
+                    <td>
+                      <Nav.Link title="Logout" onClick={logout}><DoorOpen /></Nav.Link>
+                    </td>
+                  </tr>
+                </table>
+              </Nav>
 
-                    <Nav.Item>
-                      <Nav.Link eventKey="link-5">
-                        <Link to="/employees">Employees</Link>
-                      </Nav.Link>
-                    </Nav.Item>
-                  </Nav>
-                  : null}
-            </Nav.Item>
-          </Nav>
+              : null
+            }
+
+
+          </Navbar.Collapse>
         </Navbar>
+
         <header className="App-header">
           <div>
 
