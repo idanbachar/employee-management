@@ -30,11 +30,11 @@ const Login = () => {
 
     const [language, setLanguage] = useState(defaultLanguage);
 
-    const [title, setTitle] = useState(FormLanguages.Labels.Title[language]);
-    const [mainLabel, setMainLabel] = useState(FormLanguages.Labels.Main[language]);
-    const [emailFieldLabel, setEmailFieldLabel] = useState(FormLanguages.Labels.Fields[language][0].message);
-    const [passwordFieldLabel, setPasswordFieldLabel] = useState(FormLanguages.Labels.Fields[language][1].message);
-    const [submitButtonLabel, setSubmitButtonLabel] = useState(FormLanguages.Labels.Submit[language]);
+    const [title, setTitle] = useState(FormLanguages.login.labels.title[language]);
+    const [mainLabel, setMainLabel] = useState(FormLanguages.login.labels.main[language]);
+    const [emailFieldLabel, setEmailFieldLabel] = useState(FormLanguages.login.labels.fields[language][0].message);
+    const [passwordFieldLabel, setPasswordFieldLabel] = useState(FormLanguages.login.labels.fields[language][1].message);
+    const [submitButtonLabel, setSubmitButtonLabel] = useState(FormLanguages.login.labels.submit[language]);
 
     const [showA, setShowA] = useState(false);
 
@@ -89,27 +89,27 @@ const Login = () => {
 
         if (email.length === 0) {
 
-            setEmailValidation(FormLanguages.validationErrors.inputs.email[language][0].message)
+            setEmailValidation(FormLanguages.login.validationErrors.inputs.email[language][0].message)
             return false;
         }
         else if (email.length < 12) {
-            setEmailValidation(FormLanguages.validationErrors.inputs.email[language][1].message)
+            setEmailValidation(FormLanguages.login.validationErrors.inputs.email[language][1].message)
             return false;
         }
         else if (!email.includes("@")) {
-            setEmailValidation(FormLanguages.validationErrors.inputs.email[language][2].message)
+            setEmailValidation(FormLanguages.login.validationErrors.inputs.email[language][2].message)
             return false;
         }
         else if (!email.includes(".com")) {
-            setEmailValidation(FormLanguages.validationErrors.inputs.email[language][3].message)
+            setEmailValidation(FormLanguages.login.validationErrors.inputs.email[language][3].message)
             return false;
         }
         else if (email.split('@').length > 2) {
-            setEmailValidation(FormLanguages.validationErrors.inputs.email[language][4].message)
+            setEmailValidation(FormLanguages.login.validationErrors.inputs.email[language][4].message)
             return false;
         }
         else if (email.indexOf(".com") < email.length - 4) {
-            setEmailValidation(FormLanguages.validationErrors.inputs.email[language][5].message)
+            setEmailValidation(FormLanguages.login.validationErrors.inputs.email[language][5].message)
             return false;
         }
 
@@ -120,11 +120,11 @@ const Login = () => {
     const validatePassword = () => {
 
         if (password.length === 0) {
-            setPasswordValidation(FormLanguages.validationErrors.inputs.password[language][0].message)
+            setPasswordValidation(FormLanguages.login.validationErrors.inputs.password[language][0].message)
             return false;
         }
         else if (password.length < 6) {
-            setPasswordValidation(FormLanguages.validationErrors.inputs.password[language][1].message);
+            setPasswordValidation(FormLanguages.login.validationErrors.inputs.password[language][1].message);
             return false;
         }
 
@@ -133,11 +133,11 @@ const Login = () => {
     }
 
     const changeLanguage = () => {
-        setTitle(FormLanguages.Labels.Title[language]);
-        setMainLabel(FormLanguages.Labels.Main[language]);
-        setEmailFieldLabel(FormLanguages.Labels.Fields[language][0].message);
-        setPasswordFieldLabel(FormLanguages.Labels.Fields[language][1].message);
-        setSubmitButtonLabel(FormLanguages.Labels.Submit[language]);
+        setTitle(FormLanguages.login.labels.title[language]);
+        setMainLabel(FormLanguages.login.labels.main[language]);
+        setEmailFieldLabel(FormLanguages.login.labels.fields[language][0].message);
+        setPasswordFieldLabel(FormLanguages.login.labels.fields[language][1].message);
+        setSubmitButtonLabel(FormLanguages.login.labels.submit[language]);
 
         validateFields(false);
     }

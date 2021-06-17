@@ -3,6 +3,9 @@ import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import Card from 'react-bootstrap/Card'
 import axios from 'axios';
+import Select from 'react-select';
+import FormLanguages from '../Languages/FormLanguages';
+
 import {
     BrowserRouter as Router,
     Switch,
@@ -17,6 +20,8 @@ const api = axios.create({
 
 const Register = () => {
 
+    const defaultLanguage = "EN";
+
     const [firstname, setFirstname] = useState('');
     const [lastname, setLastName] = useState('');
     const [email, setEmail] = useState('');
@@ -29,6 +34,23 @@ const Register = () => {
     const [passwordValidation, setPasswordValidation] = useState(null);
     const [repasswordValidation, setRepasswordValidation] = useState(null);
 
+    const [language, setLanguage] = useState(defaultLanguage);
+
+    const [title, setTitle] = useState(FormLanguages.register.labels.title[language]);
+    const [mainLabel, setMainLabel] = useState(FormLanguages.register.labels.main[language]);
+
+    const [firstnameFieldLabel, setFirstnameFieldLabel] = useState(FormLanguages.register.labels.fields[language][0].message);
+    const [lastnameFieldLabel, setLastnameFieldLabel] = useState(FormLanguages.register.labels.fields[language][1].message);
+    const [emailFieldLabel, setEmailFieldLabel] = useState(FormLanguages.register.labels.fields[language][2].message);
+    const [passwordFieldLabel, setPasswordFieldLabel] = useState(FormLanguages.register.labels.fields[language][3].message);
+    const [rePasswordFieldLabel, setRePasswordFieldLabel] = useState(FormLanguages.register.labels.fields[language][4].message);
+    const [submitButtonLabel, setSubmitButtonLabel] = useState(FormLanguages.register.labels.submit[language]);
+
+    const languages = [
+        { label: 'EN', value: 'EN' },
+        { label: 'HE', value: 'HE' }
+    ]
+
     const formLabelStyle = {
         margin: 'auto',
         color: 'blue'
@@ -39,9 +61,7 @@ const Register = () => {
         margin: 'auto'
     }
 
-    const validateFields = (e) => {
-
-        e.preventDefault();
+    const validateFields = (isFlag) => {
 
         const isFirstNameValid = validateFirstname();
         const isLastNameValid = validateLastname();
@@ -49,27 +69,29 @@ const Register = () => {
         const isPasswordValid = validatePassword();
         const isRepasswordValid = validateRepassword();
 
-        if (isFirstNameValid &&
-            isLastNameValid &&
-            isEmailValid &&
-            isPasswordValid &&
-            isRepasswordValid) {
-            register();
+        if (isFlag) {
+            if (isFirstNameValid &&
+                isLastNameValid &&
+                isEmailValid &&
+                isPasswordValid &&
+                isRepasswordValid) {
+                register();
+            }
         }
     }
 
     const validateFirstname = () => {
 
         if (firstname.length === 0) {
-            setFirstnameValidation("Firstname can not be empty.")
+            setFirstnameValidation(FormLanguages.register.validationErrors.inputs.firstname[language][0].message);
             return false;
         }
         else if (firstname.length === 1) {
-            setFirstnameValidation("Firstname must have atleast 2 letters.");
+            setFirstnameValidation(FormLanguages.register.validationErrors.inputs.firstname[language][1].message);
             return false;
         }
         else if (isContainsNumber(firstname)) {
-            setFirstnameValidation("Firstname can not contain numbers.");
+            setFirstnameValidation(FormLanguages.register.validationErrors.inputs.firstname[language][2].message);
             return false;
         }
 
@@ -80,15 +102,15 @@ const Register = () => {
     const validateLastname = () => {
 
         if (lastname.length === 0) {
-            setLastnameValidation("Lastname can not be empty.")
+            setLastnameValidation(FormLanguages.register.validationErrors.inputs.lastname[language][0].message);
             return false;
         }
         else if (lastname.length === 1) {
-            setLastnameValidation("Lastname must have atleast 2 letters.");
+            setLastnameValidation(FormLanguages.register.validationErrors.inputs.lastname[language][1].message);
             return false;
         }
         else if (isContainsNumber(lastname)) {
-            setLastnameValidation("Lastname can not contain numbers.");
+            setLastnameValidation(FormLanguages.register.validationErrors.inputs.lastname[language][2].message);
             return false;
         }
 
@@ -99,27 +121,28 @@ const Register = () => {
     const validateEmail = () => {
 
         if (email.length === 0) {
-            setEmailValidation("Email can not be empty.")
+
+            setEmailValidation(FormLanguages.register.validationErrors.inputs.email[language][0].message);
             return false;
         }
         else if (email.length < 12) {
-            setEmailValidation("Email must have atleast 12 letters.");
+            setEmailValidation(FormLanguages.register.validationErrors.inputs.email[language][1].message);
             return false;
         }
         else if (!email.includes("@")) {
-            setEmailValidation("Email must have '@'.");
+            setEmailValidation(FormLanguages.register.validationErrors.inputs.email[language][2].message);
             return false;
         }
         else if (!email.includes(".com")) {
-            setEmailValidation("Email must have '.com'.");
+            setEmailValidation(FormLanguages.register.validationErrors.inputs.email[language][3].message);
             return false;
         }
         else if (email.split('@').length > 2) {
-            setEmailValidation("Email must have only 1 '@'.");
+            setEmailValidation(FormLanguages.register.validationErrors.inputs.email[language][4].message);
             return false;
         }
         else if (email.indexOf(".com") < email.length - 4) {
-            setEmailValidation("'.com' must be at the end of the email.");
+            setEmailValidation(FormLanguages.register.validationErrors.inputs.email[language][5].message);
             return false;
         }
 
@@ -130,19 +153,19 @@ const Register = () => {
     const validatePassword = () => {
 
         if (password.length === 0) {
-            setPasswordValidation("Password can not be empty.")
+            setPasswordValidation(FormLanguages.register.validationErrors.inputs.password[language][0].message);
             return false;
         }
         else if (password.length < 6) {
-            setPasswordValidation("Password must have atleast 6 letters.");
+            setPasswordValidation(FormLanguages.register.validationErrors.inputs.password[language][1].message);
             return false;
         }
         else if (!isContainsNumber(password)) {
-            setPasswordValidation("Password must contain numbers.");
+            setPasswordValidation(FormLanguages.register.validationErrors.inputs.password[language][2].message);
             return false;
         }
         else if (!isContainsLetter(password)) {
-            setPasswordValidation("Password must contain letters.");
+            setPasswordValidation(FormLanguages.register.validationErrors.inputs.password[language][3].message);
             return false;
         }
 
@@ -153,24 +176,24 @@ const Register = () => {
     const validateRepassword = () => {
 
         if (repassword.length === 0) {
-            setRepasswordValidation("Repassword can not be empty.")
+            setRepasswordValidation(FormLanguages.register.validationErrors.inputs.repassword[language][0].message);
             return false;
         }
         else if (repassword.length < 6) {
-            setRepasswordValidation("Repassword must have atleast 6 letters.");
+            setRepasswordValidation(FormLanguages.register.validationErrors.inputs.repassword[language][1].message);
             return false;
         }
         else if (!isContainsNumber(repassword)) {
-            setRepasswordValidation("Repassword must contain numbers.");
+            setRepasswordValidation(FormLanguages.register.validationErrors.inputs.repassword[language][2].message);
             return false;
         }
         else if (!isContainsLetter(repassword)) {
-            setRepasswordValidation("Repassword must contain letters.");
+            setRepasswordValidation(FormLanguages.register.validationErrors.inputs.repassword[language][3].message);
             return false;
         }
 
         if (repassword !== password) {
-            setRepasswordValidation("Repassword must be equal to password.");
+            setRepasswordValidation(FormLanguages.register.validationErrors.inputs.repassword[language][4].message);
             return false;
         }
 
@@ -213,12 +236,25 @@ const Register = () => {
 
             localStorage.setItem("isLogin", JSON.stringify(data));
             window.location.href = "/manage";
-    
+
             console.log(res);
 
         }).catch(err => {
             setEmailValidation("Current email is being used by other user.");
         });
+    }
+
+    const changeLanguage = () => {
+        setTitle(FormLanguages.register.labels.title[language]);
+        setMainLabel(FormLanguages.register.labels.main[language]);
+        setFirstnameFieldLabel(FormLanguages.register.labels.fields[language][0].message);
+        setLastnameFieldLabel(FormLanguages.register.labels.fields[language][1].message);
+        setEmailFieldLabel(FormLanguages.register.labels.fields[language][2].message);
+        setPasswordFieldLabel(FormLanguages.register.labels.fields[language][3].message);
+        setRePasswordFieldLabel(FormLanguages.register.labels.fields[language][4].message);
+        setSubmitButtonLabel(FormLanguages.register.labels.submit[language]);
+
+        validateFields(false);
     }
 
     return (
@@ -228,27 +264,45 @@ const Register = () => {
                     <Redirect to="/manage" /> :
                     null}
             </Route>
-            <h2 align="left">Register</h2>
+            <h2 align="left">{title}</h2>
             <hr />
-            <br />
+            <div>
+                <table width="200">
+                    <tr>
+                        <td>
+                            <Select
+                                label="Select language"
+                                options={languages}
+                                defaultValue={languages[0]}
+                                onChange={(e) => setLanguage(e.value)}
+                            />
+                        </td>
+                        <td>
+                            <Button onClick={changeLanguage}>
+                                Update
+                            </Button>
+                        </td>
+                    </tr>
+                </table>
+            </div>
             <div style={{ boxShadow: '0px 5px 19px 3px #888888' }} >
                 <Card style={{ width: '40rem' }}>
                     <Card.Body>
-                        <h4>Personal Details</h4>
+                        <h4>{mainLabel}</h4>
                         <br />
                         <Form >
                             <Form.Group controlId="formBasicFirstname">
-                                <Form.Label style={formLabelStyle}>Firstname:</Form.Label>
+                                <Form.Label style={formLabelStyle}>{firstnameFieldLabel}:</Form.Label>
                                 <Form.Control style={formControlStyle} maxLength="15" type="text" placeholder="Enter firstname" onChange={(e) => { setFirstname(e.target.value) }} />
                                 <div><font color="red">{firstnameValidation}</font></div>
                             </Form.Group>
                             <Form.Group controlId="formBasicLastname">
-                                <Form.Label style={formLabelStyle}>Lastname:</Form.Label>
+                                <Form.Label style={formLabelStyle}>{lastnameFieldLabel}:</Form.Label>
                                 <Form.Control style={formControlStyle} maxLength="15" type="text" placeholder="Enter lastname" onChange={(e) => { setLastName(e.target.value) }} />
                                 <div><font color="red">{lastnameValidation}</font></div>
                             </Form.Group>
                             <Form.Group controlId="formBasicEmail">
-                                <Form.Label style={formLabelStyle}>Email:</Form.Label>
+                                <Form.Label style={formLabelStyle}>{emailFieldLabel}:</Form.Label>
                                 <Form.Control style={formControlStyle} maxLength="30" type="email" placeholder="Enter email" onChange={(e) => { setEmail(e.target.value) }} />
                                 <div><font color="red">{emailValidation}</font></div>
                             </Form.Group>
@@ -256,18 +310,18 @@ const Register = () => {
                             <h4>Password</h4>
                             <br />
                             <Form.Group controlId="formBasicPassword">
-                                <Form.Label style={formLabelStyle}>Password:</Form.Label>
+                                <Form.Label style={formLabelStyle}>{passwordFieldLabel}:</Form.Label>
                                 <Form.Control style={formControlStyle} maxLength="12" type="password" placeholder="Enter password" onChange={(e) => { setPassword(e.target.value) }} />
                                 <div><font color="red">{passwordValidation}</font></div>
                             </Form.Group>
                             <Form.Group controlId="formBasicRetypePassword">
-                                <Form.Label style={formLabelStyle}>Retype Password:</Form.Label>
+                                <Form.Label style={formLabelStyle}>{rePasswordFieldLabel}:</Form.Label>
                                 <Form.Control style={formControlStyle} maxLength="12" type="password" placeholder="Enter password again" onChange={(e) => { setRepassword(e.target.value) }} />
                                 <div><font color="red">{repasswordValidation}</font></div>
                             </Form.Group>
 
-                            <Button variant="primary" onClick={validateFields}>
-                                Sign Up
+                            <Button variant="primary" onClick={() => validateFields(true)}>
+                                {submitButtonLabel}
                             </Button>
                         </Form>
                     </Card.Body>
