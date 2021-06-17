@@ -6,6 +6,7 @@ import Form from 'react-bootstrap/Form'
 import Select from 'react-select';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { v4 as uuidv4 } from 'uuid';
 
 const AddEmployee = (props) => {
 
@@ -64,7 +65,7 @@ const AddEmployee = (props) => {
             isRoleValid) {
 
             const data = {
-                "id": 2,
+                "id": uuidv4(),
                 "firstname": firstname,
                 "lastname": lastname,
                 "phone": phone,

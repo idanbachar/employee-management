@@ -7,7 +7,7 @@
       "phone": "0544762652",
       "address": "Balfour",
       "role": "Programmer",
-      "startDate": "Wed Jun 16 2021"
+      "startDate": "Wed Jun 02 2021"
     },
     {
       "id": "96b59979-b17d-468b-9308-03d98de5ccff",
@@ -19,22 +19,22 @@
       "startDate": "Sun Jun 06 2021"
     },
     {
-      "id": "b4c99de8-f8c9-4645-adb1-4de98fa7d8cc",
-      "firstname": "Baruch",
-      "lastname": "Bachar",
-      "phone": "0524214121",
-      "address": "Balfour, Bat-Yam",
-      "role": "Programmer",
-      "startDate": "Wed Jun 02 2021"
+      "id": "beb52a87-5c23-477f-b8ad-81b87245131e",
+      "firstname": "Ofek",
+      "lastname": "Sadlovski",
+      "phone": "0502141241",
+      "address": "Jerusalem",
+      "role": "HR",
+      "startDate": "Sun Jun 06 2021"
     },
     {
       "id": 2,
-      "firstname": "Shaked",
-      "lastname": "Ashkenazi",
-      "phone": "0502132132",
-      "address": "Balfour",
-      "role": "Programmer",
-      "startDate": "Wed Jun 02 2021"
+      "firstname": "Moshe",
+      "lastname": "Nesher",
+      "phone": "0521312321",
+      "address": "Bait A Compim, Bat-Yam",
+      "role": "Data Analyst",
+      "startDate": "Sun May 30 2021"
     }
   ]
 }
