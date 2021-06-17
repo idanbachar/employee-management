@@ -34,9 +34,7 @@ function isAuthenticated({ email, password }) {
 server.post('/auth/register', (req, res) => {
     console.log("register endpoint called; request body:");
     console.log(req.body);
-    const { email, password } = req.body;
-
-    console.log("hello");
+    const { email, password, firstname, lastname } = req.body;
 
     if (isAuthenticated({ email, password }) === true) {
         const status = 401;
@@ -60,7 +58,7 @@ server.post('/auth/register', (req, res) => {
         var last_item_id = data.users.length > 0 ? data.users[data.users.length - 1].id : 1;
 
         //Add new user
-        data.users.push({ id: last_item_id + 1, email: email, password: password }); //add some data
+        data.users.push({ id: last_item_id + 1, email: email, password: password, firstname: firstname, lastname: lastname }); //add some data
         var writeData = fs.writeFile("./users.json", JSON.stringify(data), (err, result) => {  // WRITE
             if (err) {
                 const status = 401

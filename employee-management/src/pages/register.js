@@ -12,7 +12,8 @@ import {
     BrowserRouter as Router,
     Switch,
     Route,
-    Link
+    Link,
+    Redirect
 } from 'react-router-dom'
 
 const api = axios.create({
@@ -32,6 +33,9 @@ const Register = () => {
     const [emailValidation, setEmailValidation] = useState(null);
     const [passwordValidation, setPasswordValidation] = useState(null);
     const [repasswordValidation, setRepasswordValidation] = useState(null);
+
+    const user = useSelector(state => state.user);
+    const dispatch = useDispatch();
 
     const formLabelStyle = {
         margin: 'auto',
@@ -214,14 +218,28 @@ const Register = () => {
         };
 
         api.post(`/`, data).then(res => {
+            dispatch({
+                type: 'INIT',
+                payload: data
+            })
+
             console.log(res);
+
         }).catch(err => {
-            console.log(err);
+            setEmailValidation("Current email is being used by other user.");
         });
     }
 
     return (
         <div>
+            <Route>
+                {user !== null ?
+
+                    <Redirect to="/manage" /> :
+
+                    null
+                }
+            </Route>
             <h2 align="left">Register</h2>
             <hr />
             <br />
@@ -260,7 +278,7 @@ const Register = () => {
                                 <div><font color="red">{repasswordValidation}</font></div>
                             </Form.Group>
 
-                            <Button variant="primary" type="submit" onClick={validateFields}>
+                            <Button variant="primary" onClick={validateFields}>
                                 Sign Up
                             </Button>
                         </Form>

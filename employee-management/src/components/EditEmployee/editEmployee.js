@@ -34,6 +34,11 @@ const EditEmployee = (props) => {
     const [modalShow, setModalShow] = React.useState(false);
     const dispatch = useDispatch();
 
+    const [showDialog, setShowDialog] = useState(false);
+
+    const handleClose = () => setShowDialog(false);
+    const handleShow = () => setShowDialog(true);
+
     const roles = [
         { label: 'HR', value: 'HR' },
         { label: 'Programmer', value: 'Programmer' },
@@ -209,11 +214,20 @@ const EditEmployee = (props) => {
         setModalShow(false);
     }
 
+    const openDeleteDialog = () => {
+        setShowDialog(true);
+    }
+
+    const deleteEmployee = () => {
+        props.data.deleteHandler(props.data.id)
+        setShowDialog(false);
+    }
+
     return (
         <div>
             <Button onClick={() => setModalShow(true)}><PencilFill /></Button>
             &nbsp;
-            <Button variant="danger" onClick={() => props.data.deleteHandler(props.data.id)}><TrashFill /></Button>
+            <Button variant="danger" onClick={openDeleteDialog}> <TrashFill /></Button>
 
             <Modal show={modalShow} onHide={() => setModalShow(false)} aria-labelledby="contained-modal-title-vcenter">
                 <Modal.Header closeButton>
@@ -266,6 +280,27 @@ const EditEmployee = (props) => {
                     <Button variant="danger" onClick={resetEdit}>Cancel</Button>
                 </Modal.Footer>
             </Modal >
+
+            <Modal
+                show={showDialog}
+                onHide={handleClose}
+                backdrop="static"
+                keyboard={false}
+            >
+                <Modal.Header closeButton>
+                    <Modal.Title>Delete Employee</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    Are you sure you want to delete {firstname} {lastname} from
+                    employees?
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="success" onClick={deleteEmployee}>
+                        Yes
+                    </Button>
+                    <Button variant="danger" onClick={handleClose}>No</Button>
+                </Modal.Footer>
+            </Modal>
         </div>
     );
 }

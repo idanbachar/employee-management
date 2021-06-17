@@ -66,6 +66,7 @@ function App() {
             {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
             <Switch>
+
               <Route path="/login">
                 <Login />
                 Don't have an account? <Link to="/register">Sign Up</Link>.
@@ -76,7 +77,7 @@ function App() {
                   <div>
                     <Register />
                     Have an account ? <Link to="/login">Sign In</Link>.
-                  </div> : null
+                  </div> : <Manage />
                 }
               </Route>
               <Route path="/manage">

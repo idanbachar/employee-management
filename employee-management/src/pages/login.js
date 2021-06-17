@@ -1,18 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import Table from 'react-bootstrap/Table';
-import EmployeeCard from '../components/EmployeeCard/EmployeeCard';
 import { useDispatch, useSelector } from 'react-redux';
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import Card from 'react-bootstrap/Card'
-import Register from '../pages/register';
 import axios from 'axios';
+import Toast from 'react-bootstrap/Toast'
 
 import {
     BrowserRouter as Router,
-    Switch,
     Route,
-    Link,
     Redirect
 } from 'react-router-dom'
 
@@ -29,6 +25,10 @@ const Login = () => {
 
     const [emailValidation, setEmailValidation] = useState(null);
     const [passwordValidation, setPasswordValidation] = useState(null);
+
+    const [showA, setShowA] = useState(false);
+
+    const toggleShowA = () => setShowA(!showA);
 
     const user = useSelector(state => state.user);
     const dispatch = useDispatch();
@@ -60,15 +60,14 @@ const Login = () => {
         }
 
         api.post(`/`, data).then(res => {
-
-            localStorage.setItem('token', res.data.access_token);
-
             dispatch({
                 type: 'INIT',
                 payload: data
             })
+
             console.log(res);
         }).catch(err => {
+            setPasswordValidation("Invalid email or password.");
             console.log(err);
         })
 
@@ -116,15 +115,20 @@ const Login = () => {
             return false;
         }
 
-
         setPasswordValidation(null);
         return true;
     }
 
     return (
+
         <div>
             <Route>
-                {user != null ? <Redirect to="/manage" /> : null}
+                {user !== null ?
+
+                    <Redirect to="/manage" /> :
+
+                    null
+                }
             </Route>
             <h2 align="left">Login</h2>
             <hr />
@@ -156,7 +160,30 @@ const Login = () => {
             </div>
             <br />
 
-
+            <div
+                aria-live="polite"
+                aria-atomic="true"
+                style={{
+                    position: 'relative',
+                    minHeight: '200px',
+                }}
+            >
+                <div
+                    style={{
+                        position: 'absolute',
+                        top: 0,
+                        right: 0,
+                    }}
+                >
+                    <Toast autohide="true" show={showA} onClose={toggleShowA}>
+                        <Toast.Header>
+                            <strong className="mr-auto">Message</strong>
+                            <small>1 sec ago</small>
+                        </Toast.Header>
+                        <Toast.Body>Login has been succeed!</Toast.Body>
+                    </Toast>
+                </div>
+            </div>
         </div>
     )
 
