@@ -3,7 +3,6 @@ import Login from './pages/login';
 import Register from './pages/register';
 import Manage from './pages/manage';
 import Employees from './pages/employees';
-import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav'
 
@@ -14,17 +13,17 @@ import {
   Link,
   Redirect
 } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux';
 
 function App() {
-  const user = useSelector(state => state.user);
-  const dispatch = useDispatch();
 
   const logout = () => {
-    dispatch({
-      type: 'LOGOUT',
-      payload: null
-    })
+
+    localStorage.clear();
+    window.location.reload();
+    // dispatch({
+    //   type: 'LOGOUT',
+    //   payload: null
+    // })
   }
 
   return (
@@ -37,7 +36,7 @@ function App() {
           <Nav fill variant="tabs" defaultActiveKey="/home">
             <Nav.Item>
               {
-                user !== null ?
+                localStorage.getItem("isLogin") !== null ?
                   <Nav>
                     <Nav.Link eventKey="link-3">
                       <Link to="/login" onClick={logout}>Logout</Link>
@@ -73,15 +72,11 @@ function App() {
 
               </Route>
               <Route path="/register">
-                {user === null ?
-                  <div>
-                    <Register />
-                    Have an account ? <Link to="/login">Sign In</Link>.
-                  </div> : <Manage />
-                }
+                <Register />
+                Have an account ? <Link to="/login">Sign In</Link>.
               </Route>
               <Route path="/manage">
-                {user !== null ?
+                {localStorage.getItem("isLogin") !== null ?
                   <Manage /> :
                   <div>
                     <Login />
@@ -91,7 +86,7 @@ function App() {
                 }
               </Route>
               <Route path="/employees">
-                {user !== null ?
+                {localStorage.getItem("isLogin") !== null ?
                   <Employees /> :
                   <div>
                     <Login />

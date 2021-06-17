@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import Card from 'react-bootstrap/Card'
@@ -30,9 +29,6 @@ const Login = () => {
 
     const toggleShowA = () => setShowA(!showA);
 
-    const user = useSelector(state => state.user);
-    const dispatch = useDispatch();
-
     const formLabelStyle = {
         margin: 'auto',
         color: 'blue'
@@ -60,10 +56,9 @@ const Login = () => {
         }
 
         api.post(`/`, data).then(res => {
-            dispatch({
-                type: 'INIT',
-                payload: data
-            })
+
+            localStorage.setItem("isLogin", JSON.stringify(data));
+            window.location.href = "/manage";
 
             console.log(res);
         }).catch(err => {
@@ -123,12 +118,9 @@ const Login = () => {
 
         <div>
             <Route>
-                {user !== null ?
-
+                {localStorage.getItem("isLogin") !== null ?
                     <Redirect to="/manage" /> :
-
-                    null
-                }
+                    null}
             </Route>
             <h2 align="left">Login</h2>
             <hr />

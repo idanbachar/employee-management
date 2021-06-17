@@ -1,13 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import Table from 'react-bootstrap/Table';
-import EmployeeCard from '../components/EmployeeCard/EmployeeCard';
-import { useDispatch, useSelector } from 'react-redux';
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import Card from 'react-bootstrap/Card'
 import axios from 'axios';
-import { SegmentedNav } from 'react-bootstrap-icons';
-import { validate } from 'uuid';
 import {
     BrowserRouter as Router,
     Switch,
@@ -33,9 +28,6 @@ const Register = () => {
     const [emailValidation, setEmailValidation] = useState(null);
     const [passwordValidation, setPasswordValidation] = useState(null);
     const [repasswordValidation, setRepasswordValidation] = useState(null);
-
-    const user = useSelector(state => state.user);
-    const dispatch = useDispatch();
 
     const formLabelStyle = {
         margin: 'auto',
@@ -218,11 +210,10 @@ const Register = () => {
         };
 
         api.post(`/`, data).then(res => {
-            dispatch({
-                type: 'INIT',
-                payload: data
-            })
 
+            localStorage.setItem("isLogin", JSON.stringify(data));
+            window.location.href = "/manage";
+    
             console.log(res);
 
         }).catch(err => {
@@ -233,12 +224,9 @@ const Register = () => {
     return (
         <div>
             <Route>
-                {user !== null ?
-
+                {localStorage.getItem("isLogin") !== null ?
                     <Redirect to="/manage" /> :
-
-                    null
-                }
+                    null}
             </Route>
             <h2 align="left">Register</h2>
             <hr />
