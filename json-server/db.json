@@ -60,27 +60,6 @@
       "email": "test123@test.com",
       "password": "test123",
       "id": 2
-    },
-    {
-      "firstname": "miki",
-      "lastname": "geva",
-      "email": "miki@gmail.com",
-      "password": "assassins2",
-      "id": 3
-    },
-    {
-      "firstname": "kobi",
-      "lastname": "machat",
-      "email": "kobi@gmail.com",
-      "password": "assassins2",
-      "id": 4
-    },
-    {
-      "firstname": "tal",
-      "lastname": "ozalvo",
-      "email": "tal@gmail.com",
-      "password": "assassins2",
-      "id": 5
     }
   ]
 }
