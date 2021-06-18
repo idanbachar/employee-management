@@ -15,7 +15,7 @@
       "lastname": "Cohen",
       "phone": "0544321451",
       "address": "Arlozorov",
-      "role": "Programmer",
+      "role": "Data Analyst",
       "startDate": "Sun Jun 06 2021"
     },
     {
@@ -53,6 +53,13 @@
       "email": "idanac2@gmail.com",
       "password": "i123456",
       "id": 1
+    },
+    {
+      "firstname": "test",
+      "lastname": "king",
+      "email": "test123@gmail.com",
+      "password": "test123",
+      "id": 2
     }
   ]
 }

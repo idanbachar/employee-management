@@ -9,9 +9,12 @@ import FormLanguages from '../Languages/FormLanguages';
 
 import {
     BrowserRouter as Router,
+    Switch,
     Route,
+    Link,
     Redirect
 } from 'react-router-dom'
+
 
 const api = axios.create({
     baseURL: `http://localhost:3000/`
@@ -171,70 +174,58 @@ const Login = () => {
                     <Redirect to="/manage" /> :
                     null}
             </Route>
-            <h2 align="left">{title}</h2>
-            <hr />
-            <div>
-                <table width="100">
-                    <tr>
-                        <td>
-                            <Select
-                                label="Select language"
-                                options={languages}
-                                defaultValue={languages[0]}
-                                onChange={(e) => changeLanguage(e.value)}
-                            />
-                        </td>
-                    </tr>
-                </table>
-            </div>
-
             <br />
-            <div style={{ boxShadow: '0px 5px 19px 3px #888888' }} >
-                <Card style={{ width: '40rem' }}>
-                    <Card.Body>
-                        <h4>{mainLabel}</h4>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-3"></div>
+                    <div class="col-md-3">
+                        <h2>{title}</h2>
                         <br />
-                        <Form >
-                            <Form.Group controlId="formBasicEmail">
-                                <Form.Label style={formLabelStyle}>{emailFieldLabel}:</Form.Label>
-                                <Form.Control style={formControlStyle} maxLength="30" type="email" placeholder="Enter email" onChange={(e) => { setEmail(e.target.value) }} />
-                                <div><font color="red">{emailValidation}</font></div>
-                            </Form.Group>
+                    </div>
 
-                            <Form.Group controlId="formBasicPassword">
-                                <Form.Label style={formLabelStyle}>{passwordFieldLabel}:</Form.Label>
-                                <Form.Control style={formControlStyle} maxLength="12" type="password" placeholder="Enter password" onChange={(e) => { setPassword(e.target.value) }} />
-                                <div><font color="red">{passwordValidation}</font></div>
-                            </Form.Group>
-                            <Button onClick={() => validateFields(true, language)} variant="primary">
-                                {submitButtonLabel}
-                            </Button>
-                        </Form>
-                    </Card.Body>
-                </Card>
-            </div>
-            <div
-                aria-live="polite"
-                aria-atomic="true"
-                style={{
-                    position: 'relative',
-                    minHeight: '200px',
-                }}
-            >
-                <div
-                    style={{
-                        position: 'absolute',
-                        top: 0,
-                        right: 0,
-                    }}
-                >
-                    <Toast autohide="true" show={showA} onClose={toggleShowA}>
-                        <Toast.Header>
-                            <strong className="mr-auto">Message</strong>
-                            <small>1 sec ago</small>
-                        </Toast.Header>
-                        <Toast.Body>Login has been succeed!</Toast.Body>
-                    </Toast>
+                </div>
+                <div class="row">
+                    <div class="col-md-3"></div>
+                    <div class="col-md-2">
+                        <Select
+                            label="Select language"
+                            options={languages}
+                            defaultValue={languages[0]}
+                            onChange={(e) => changeLanguage(e.value)}
+                        />
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-md-3"></div>
+                    <div class="col-md-6">
+                        <div style={{ boxShadow: '0px 5px 19px 3px #888888' }} >
+                            <Card>
+                                <Card.Body>
+                                    <Form >
+                                        <Form.Group controlId="formBasicEmail">
+                                            <Form.Label style={formLabelStyle}>{emailFieldLabel}:</Form.Label>
+                                            <Form.Control style={formControlStyle} maxLength="30" type="email" placeholder="Enter email" onChange={(e) => { setEmail(e.target.value) }} />
+                                            <div><font color="red">{emailValidation}</font></div>
+                                        </Form.Group>
+
+                                        <Form.Group controlId="formBasicPassword">
+                                            <Form.Label style={formLabelStyle}>{passwordFieldLabel}:</Form.Label>
+                                            <Form.Control style={formControlStyle} maxLength="12" type="password" placeholder="Enter password" onChange={(e) => { setPassword(e.target.value) }} />
+                                            <div><font color="red">{passwordValidation}</font></div>
+                                        </Form.Group>
+                                        <Button onClick={() => validateFields(true, language)} variant="primary">
+                                            {submitButtonLabel}
+                                        </Button>
+                                    </Form>
+                                </Card.Body>
+                            </Card>
+                        </div>
+                        <br />
+                        <Route>
+                            Don't have an account? <Link to="/register">Sign Up</Link>
+                        </Route>
+                    </div>
                 </div>
             </div>
         </div>

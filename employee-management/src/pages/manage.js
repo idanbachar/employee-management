@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import '../App.css';
 import Table from 'react-bootstrap/Table';
 import axios from 'axios';
 import AddEmployee from '../components/AddEmployee/addEmployee';
@@ -8,6 +9,7 @@ import { PencilFill, TrashFill } from 'react-bootstrap-icons';
 import Button from 'react-bootstrap/Button'
 import EmployeeCard from '../components/EmployeeCard/EmployeeCard';
 import { useDispatch, useSelector } from 'react-redux';
+import CardDeck from 'react-bootstrap/CardDeck'
 
 const api = axios.create({
     baseURL: `http://localhost:3000/employees`
@@ -70,49 +72,48 @@ const Manage = () => {
 
     return (
         <div>
-            <h2 align="left">Managing Employees</h2>
-            <hr />
-            <div align="right">
-                <Button variant="primary" onClick={() => setEmployeeModalShow(true)}>
-                    + Add Employee
-                </Button>
+            <br />
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4">
+                        <h2>Managing Employees</h2>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-10"></div>
+                    <div class="col-md-2">
+                        <Button variant="primary" onClick={() => setEmployeeModalShow(true)}>
+                            + Add Employee
+                        </Button>
+                    </div>
+                </div>
+
+                <AddEmployee addEmployee={addEmployee} show={addEmployeeModalShow} onHide={() => setEmployeeModalShow(false)} />
+
+                <br />
+                <div class="row">
+                    <div class="col-md-12">
+                        <CardDeck>
+                            {employees.map(employee =>
+                                <EmployeeCard
+                                    key={employee.id}
+                                    id={employee.id}
+                                    firstname={employee.firstname}
+                                    lastname={employee.lastname}
+                                    phone={employee.phone}
+                                    address={employee.address}
+                                    role={employee.role}
+                                    startDate={employee.startDate}
+                                    isEditable={true}
+                                    deleteHandler={() => deleteEmployee(employee.id)}
+                                />
+                            )}
+                        </CardDeck>
+                    </div>
+                </div>
             </div>
             <br />
-            <AddEmployee addEmployee={addEmployee} show={addEmployeeModalShow} onHide={() => setEmployeeModalShow(false)} />
-
-            <div style={{ backgroundColor: 'white', fontSize: '18px', fontFamily: 'arial', textAlign: 'center', boxShadow: '0px 5px 19px 3px #888888' }}>
-
-                <Table>
-                    <thead style={{ color: 'darkgray' }}>
-                        <tr>
-                            <th></th>
-                            <th>First Name</th>
-                            <th>Last Name</th>
-                            <th>Phone</th>
-                            <th>Address</th>
-                            <th>Role</th>
-                            <th>Start Date</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {employees.map(employee =>
-                            <EmployeeCard
-                                id={employee.id}
-                                firstname={employee.firstname}
-                                lastname={employee.lastname}
-                                phone={employee.phone}
-                                address={employee.address}
-                                role={employee.role}
-                                startDate={employee.startDate}
-                                isEditable={true}
-                                deleteHandler={() => deleteEmployee(employee.id)}
-                            />
-                        )}
-                    </tbody>
-                </Table>
-            </div >
-        </div >
+        </div>
     )
 }
 

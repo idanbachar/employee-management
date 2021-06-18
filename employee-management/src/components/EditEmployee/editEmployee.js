@@ -6,7 +6,7 @@ import Form from 'react-bootstrap/Form'
 import Select from 'react-select';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { PencilFill, TrashFill } from 'react-bootstrap-icons';
+import { Pen, PencilFill, PenFill, TrashFill } from 'react-bootstrap-icons';
 import { useDispatch } from 'react-redux';
 import axios from 'axios';
 
@@ -232,9 +232,10 @@ const EditEmployee = (props) => {
 
     return (
         <div>
-            <Button onClick={() => setModalShow(true)}><PencilFill /></Button>
-            &nbsp;
-            <Button variant="danger" onClick={openDeleteDialog}> <TrashFill /></Button>
+
+            <a onClick={() => setModalShow(true)}><PencilFill color="blue" /></a>
+            |
+            <a onClick={() => openDeleteDialog(true)}><TrashFill color="red" /></a>
 
             <Modal show={modalShow} onHide={() => setModalShow(false)} aria-labelledby="contained-modal-title-vcenter">
                 <Modal.Header closeButton>

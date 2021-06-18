@@ -280,67 +280,81 @@ const Register = () => {
                     <Redirect to="/manage" /> :
                     null}
             </Route>
-            <h2 align="left">{title}</h2>
-            <hr />
-            <div>
-                <table width="100">
-                    <tr>
-                        <td>
-                            <Select
-                                label="Select language"
-                                options={languages}
-                                defaultValue={languages[0]}
-                                onChange={(e) => changeLanguage(e.value)}
-                            />
-                        </td>
-                    </tr>
-                </table>
-            </div>
-            <div style={{ boxShadow: '0px 5px 19px 3px #888888' }} >
-                <Card style={{ width: '40rem' }}>
-                    <Card.Body>
-                        <h4>{mainLabel}</h4>
-                        <br />
-                        <Form >
-                            <Form.Group controlId="formBasicFirstname">
-                                <Form.Label style={formLabelStyle}>{firstnameFieldLabel}:</Form.Label>
-                                <Form.Control style={formControlStyle} maxLength="15" type="text" placeholder="Enter firstname" onChange={(e) => { setFirstname(e.target.value) }} />
-                                <div><font color="red">{firstnameValidation}</font></div>
-                            </Form.Group>
-                            <Form.Group controlId="formBasicLastname">
-                                <Form.Label style={formLabelStyle}>{lastnameFieldLabel}:</Form.Label>
-                                <Form.Control style={formControlStyle} maxLength="15" type="text" placeholder="Enter lastname" onChange={(e) => { setLastName(e.target.value) }} />
-                                <div><font color="red">{lastnameValidation}</font></div>
-                            </Form.Group>
-                            <Form.Group controlId="formBasicEmail">
-                                <Form.Label style={formLabelStyle}>{emailFieldLabel}:</Form.Label>
-                                <Form.Control style={formControlStyle} maxLength="30" type="email" placeholder="Enter email" onChange={(e) => { setEmail(e.target.value) }} />
-                                <div><font color="red">{emailValidation}</font></div>
-                            </Form.Group>
-                            <hr />
-                            <h4>Password</h4>
-                            <br />
-                            <Form.Group controlId="formBasicPassword">
-                                <Form.Label style={formLabelStyle}>{passwordFieldLabel}:</Form.Label>
-                                <Form.Control style={formControlStyle} maxLength="12" type="password" placeholder="Enter password" onChange={(e) => { setPassword(e.target.value) }} />
-                                <div><font color="red">{passwordValidation}</font></div>
-                            </Form.Group>
-                            <Form.Group controlId="formBasicRetypePassword">
-                                <Form.Label style={formLabelStyle}>{rePasswordFieldLabel}:</Form.Label>
-                                <Form.Control style={formControlStyle} maxLength="12" type="password" placeholder="Enter password again" onChange={(e) => { setRepassword(e.target.value) }} />
-                                <div><font color="red">{repasswordValidation}</font></div>
-                            </Form.Group>
-
-                            <Button variant="primary" onClick={() => validateFields(true, language)}>
-                                {submitButtonLabel}
-                            </Button>
-                        </Form>
-                    </Card.Body>
-                </Card>
-
-            </div>
             <br />
-        </div >
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-3"></div>
+                    <div class="col-md-3">
+                        <h2>{title}</h2>
+                        <br />
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col-md-3"></div>
+                    <div class="col-md-2">
+                        <Select
+                            label="Select language"
+                            options={languages}
+                            defaultValue={languages[0]}
+                            onChange={(e) => changeLanguage(e.value)}
+                        />
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-md-3"></div>
+                    <div class="col-md-6">
+                        <div style={{ boxShadow: '0px 5px 19px 3px #888888' }} >
+                            <Card >
+                                <Card.Body>
+                                    <h4>{mainLabel}</h4>
+                                    <br />
+                                    <Form >
+                                        <Form.Group controlId="formBasicFirstname">
+                                            <Form.Label style={formLabelStyle}>{firstnameFieldLabel}:</Form.Label>
+                                            <Form.Control style={formControlStyle} maxLength="15" type="text" placeholder="Enter firstname" onChange={(e) => { setFirstname(e.target.value) }} />
+                                            <div><font color="red">{firstnameValidation}</font></div>
+                                        </Form.Group>
+                                        <Form.Group controlId="formBasicLastname">
+                                            <Form.Label style={formLabelStyle}>{lastnameFieldLabel}:</Form.Label>
+                                            <Form.Control style={formControlStyle} maxLength="15" type="text" placeholder="Enter lastname" onChange={(e) => { setLastName(e.target.value) }} />
+                                            <div><font color="red">{lastnameValidation}</font></div>
+                                        </Form.Group>
+                                        <Form.Group controlId="formBasicEmail">
+                                            <Form.Label style={formLabelStyle}>{emailFieldLabel}:</Form.Label>
+                                            <Form.Control style={formControlStyle} maxLength="30" type="email" placeholder="Enter email" onChange={(e) => { setEmail(e.target.value) }} />
+                                            <div><font color="red">{emailValidation}</font></div>
+                                        </Form.Group>
+                                        <hr />
+                                        <h4>Password</h4>
+                                        <br />
+                                        <Form.Group controlId="formBasicPassword">
+                                            <Form.Label style={formLabelStyle}>{passwordFieldLabel}:</Form.Label>
+                                            <Form.Control style={formControlStyle} maxLength="12" type="password" placeholder="Enter password" onChange={(e) => { setPassword(e.target.value) }} />
+                                            <div><font color="red">{passwordValidation}</font></div>
+                                        </Form.Group>
+                                        <Form.Group controlId="formBasicRetypePassword">
+                                            <Form.Label style={formLabelStyle}>{rePasswordFieldLabel}:</Form.Label>
+                                            <Form.Control style={formControlStyle} maxLength="12" type="password" placeholder="Enter password again" onChange={(e) => { setRepassword(e.target.value) }} />
+                                            <div><font color="red">{repasswordValidation}</font></div>
+                                        </Form.Group>
+
+                                        <Button variant="primary" onClick={() => validateFields(true, language)}>
+                                            {submitButtonLabel}
+                                        </Button>
+                                    </Form>
+                                </Card.Body>
+                            </Card>
+                        </div>
+                        <br />
+                        <Route>
+                            Have an account? <Link to="/login">Sign In</Link>
+                        </Route>
+                    </div>
+                </div>
+            </div>
+        </div>
     )
 
 }

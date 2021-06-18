@@ -2,7 +2,7 @@ const FormLanguages = {
     login: {
         labels: {
             title: {
-                EN: "Login",
+                EN: "Sign In",
                 HE: "התחברות"
             },
             main: {
@@ -60,7 +60,7 @@ const FormLanguages = {
     register: {
         labels: {
             title: {
-                EN: "Register",
+                EN: "Sign Up",
                 HE: "הרשמה"
             },
             main: {
