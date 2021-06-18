@@ -223,6 +223,7 @@ const AddEmployee = (props) => {
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="formGroupRoll">
                             <Form.Label>Start Date</Form.Label>
+                            <br />
                             <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} />
                         </Form.Group>
                     </Form>
