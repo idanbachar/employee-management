@@ -11,14 +11,17 @@ const EmployeeCard = (props) => {
     // handles indication of is mobile state
     const handleResize = () => {
         if (window.innerWidth < 720) {
-            setIsMobile(true)
+            setIsMobile(true);
+            sessionStorage.setItem("isMobile", "true");
         } else {
-            setIsMobile(false)
+            setIsMobile(false);
+            sessionStorage.setItem("isMobile", "false");
         }
     }
 
     useEffect(() => {
 
+        handleResize();
         // listen to screen resolution change and calls handle resize function:
         window.addEventListener("resize", handleResize)
 
@@ -27,7 +30,7 @@ const EmployeeCard = (props) => {
     return (
         <>
             {           /*   2 displays: for computer and mobile     */
-                !isMobile ?
+                sessionStorage.getItem("isMobile") === "false" ?
                     <tr>
                         <td><img width="70" src="https://cdn.icon-icons.com/icons2/1736/PNG/512/4043260-avatar-male-man-portrait_113269.png" /></td>
                         <td>{props.firstname}</td>

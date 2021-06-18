@@ -33,20 +33,26 @@ const Employees = () => {
             dispatch({
                 type: 'Mobile'
             })
+
+            sessionStorage.setItem("isMobile", "true");
+
         } else {
             setIsMobile(false);
             dispatch({
                 type: 'Computer'
             })
+            sessionStorage.setItem("isMobile", "false");
         }
     }
 
     useEffect(() => {
 
-        // listen to screen resolution change and calls handle resize function:
-        window.addEventListener("resize", handleResize)
+        handleResize();
 
-    }, [])
+        // listen to screen resolution change and calls handle resize function:
+        window.addEventListener("resize", handleResize);
+
+    })
 
     useEffect(async () => {
 
@@ -74,13 +80,15 @@ const Employees = () => {
             type: 'INIT',
             payload: data
         });
+
+        handleResize();
     }
 
     return (
         <div>
             <br />
             {           /*   2 displays: for computer and mobile     */
-                !isMobile ?
+                sessionStorage.getItem("isMobile") === "false" ?
                     <div class="container">
                         <div class="row">
                             <div class="col-md-4">

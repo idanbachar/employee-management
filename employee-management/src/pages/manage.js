@@ -40,11 +40,15 @@ const Manage = () => {
             dispatch({
                 type: 'Mobile'
             })
+
+            sessionStorage.setItem("isMobile", "true");
         } else {
             setIsMobile(false);
             dispatch({
                 type: 'Computer'
             })
+
+            sessionStorage.setItem("isMobile", "false");
         }
     }
 
@@ -53,7 +57,7 @@ const Manage = () => {
         // listen to screen resolution change and calls handle resize function:
         window.addEventListener("resize", handleResize);
 
-    }, [])
+    })
 
     useEffect(async () => {
 
@@ -125,7 +129,7 @@ const Manage = () => {
         <div>
             <br />
             {           /*   2 displays: for computer and mobile     */
-                !isMobile ?
+                sessionStorage.getItem("isMobile") === "false" ?
                     <div class="container">
                         <div class="row">
                             <div class="col-md-10">
