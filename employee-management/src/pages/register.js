@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import Card from 'react-bootstrap/Card'
@@ -8,7 +8,6 @@ import FormLanguages from '../Languages/FormLanguages';
 
 import {
     BrowserRouter as Router,
-    Switch,
     Route,
     Link,
     Redirect
@@ -20,25 +19,29 @@ const api = axios.create({
 
 const Register = () => {
 
+    // default language:
     const defaultLanguage = "EN";
 
+    // form fields states:
     const [firstname, setFirstname] = useState('');
     const [lastname, setLastName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [repassword, setRepassword] = useState('');
 
+    // form fields validation states:
     const [firstnameValidation, setFirstnameValidation] = useState(null);
     const [lastnameValidation, setLastnameValidation] = useState(null);
     const [emailValidation, setEmailValidation] = useState(null);
     const [passwordValidation, setPasswordValidation] = useState(null);
     const [repasswordValidation, setRepasswordValidation] = useState(null);
 
+    // language state:
     const [language, setLanguage] = useState(defaultLanguage);
 
+    // elements language states:
     const [title, setTitle] = useState(FormLanguages.register.labels.title[language]);
     const [mainLabel, setMainLabel] = useState(FormLanguages.register.labels.main[language]);
-
     const [firstnameFieldLabel, setFirstnameFieldLabel] = useState(FormLanguages.register.labels.fields[language][0].message);
     const [lastnameFieldLabel, setLastnameFieldLabel] = useState(FormLanguages.register.labels.fields[language][1].message);
     const [emailFieldLabel, setEmailFieldLabel] = useState(FormLanguages.register.labels.fields[language][2].message);
@@ -46,21 +49,26 @@ const Register = () => {
     const [rePasswordFieldLabel, setRePasswordFieldLabel] = useState(FormLanguages.register.labels.fields[language][4].message);
     const [submitButtonLabel, setSubmitButtonLabel] = useState(FormLanguages.register.labels.submit[language]);
 
+    // available languages:
     const languages = [
         { label: 'EN', value: 'EN' },
         { label: 'HE', value: 'HE' }
     ]
 
+    // form label css style:
     const formLabelStyle = {
         margin: 'auto',
         color: 'blue'
     }
 
+    // form control css style:
     const formControlStyle = {
         width: '60%',
         margin: 'auto'
     }
 
+    // receives isFlag = (if true start validation and handle register), and language
+    // updates validation language and handles register
     const validateFields = (isFlag, lang) => {
 
         const isFirstNameValid = validateFirstname(lang);
@@ -80,6 +88,48 @@ const Register = () => {
         }
     }
 
+    // handles register. sends entered firstname, lastname, email, password and try register
+    const handleRegister = async () => {
+
+        // register data to send:
+        const data = {
+            firstname: firstname,
+            lastname: lastname,
+            email: email,
+            password: password
+
+        };
+
+        // start post request with data auth:
+        api.post(`/auth/register`, data).then(res => {
+
+            // when post success, receive access token:
+            const access_token = res.data.access_token;
+
+            // config object with received access token:
+            const config = {
+                headers: {
+                    Authorization: 'Bearer ' + access_token
+                }
+            }
+
+            console.log(res);
+
+            // send post request to add created user with his personal details (firstname, lastname):
+            api.post(`/users`, data, config).then(result => {
+
+                console.log(result);
+                window.location.href = "/login";
+            }).catch(error => {
+                console.log(error);
+            })
+
+        }).catch(err => {
+            setEmailValidation("Current email is being used by other user.");
+        });
+    }
+
+    // validation for firstname with received language as parameter
     const validateFirstname = (lang) => {
 
         if (firstname.length === 0) {
@@ -99,6 +149,7 @@ const Register = () => {
         return true;
     }
 
+    // validation for lastname with received language as parameter
     const validateLastname = (lang) => {
 
         if (lastname.length === 0) {
@@ -118,6 +169,7 @@ const Register = () => {
         return true;
     }
 
+    // validation for email with received language as parameter
     const validateEmail = (lang) => {
 
         if (email.length === 0) {
@@ -150,6 +202,7 @@ const Register = () => {
         return true;
     }
 
+    // validation for password with received language as parameter
     const validatePassword = (lang) => {
 
         if (password.length === 0) {
@@ -173,6 +226,7 @@ const Register = () => {
         return true;
     }
 
+    // validation for repassword with received language as parameter
     const validateRepassword = (lang) => {
 
         if (repassword.length === 0) {
@@ -201,63 +255,7 @@ const Register = () => {
         return true;
     }
 
-
-    const isContainsNumber = (value) => {
-
-        for (let i = 0; i < value.length; i++) {
-            if (!isNaN(value.charAt(i)))
-                return true;
-        }
-
-        return false;
-    }
-
-    const isContainsLetter = (value) => {
-
-        for (let i = 0; i < value.length; i++) {
-            if (isNaN(value.charAt(i)))
-                return true;
-        }
-
-        return false;
-    }
-
-    const handleRegister = async () => {
-
-        const data = {
-            firstname: firstname,
-            lastname: lastname,
-            email: email,
-            password: password
-
-        };
-
-        api.post(`/auth/register`, data).then(res => {
-
-
-            console.log(res);
-
-            const access_token = res.data.access_token;
-            const config = {
-                headers: {
-                    Authorization: 'Bearer ' + access_token
-                }
-            }
-
-            api.post(`/users`, data, config).then(result => {
-                console.log(result);
-                window.location.href = "/login";
-            }).catch(error => {
-                console.log(error);
-            })
-
-
-
-        }).catch(err => {
-            setEmailValidation("Current email is being used by other user.");
-        });
-    }
-
+    // receives language and set form labels with received language
     const changeLanguage = (lang) => {
 
         setTitle(FormLanguages.register.labels.title[lang]);
@@ -271,6 +269,28 @@ const Register = () => {
         setLanguage(lang);
 
         validateFields(false, lang);
+    }
+
+    // receives a string and returns true if contains numbers
+    const isContainsNumber = (value) => {
+
+        for (let i = 0; i < value.length; i++) {
+            if (!isNaN(value.charAt(i)))
+                return true;
+        }
+
+        return false;
+    }
+
+    // receives a string and returns true if contains letters
+    const isContainsLetter = (value) => {
+
+        for (let i = 0; i < value.length; i++) {
+            if (isNaN(value.charAt(i)))
+                return true;
+        }
+
+        return false;
     }
 
     return (
@@ -288,7 +308,6 @@ const Register = () => {
                         <h2>{title}</h2>
                         <br />
                     </div>
-
                 </div>
                 <div class="row">
                     <div class="col-md-3"></div>
@@ -339,7 +358,6 @@ const Register = () => {
                                             <Form.Control style={formControlStyle} maxLength="12" type="password" placeholder="Enter password again" onChange={(e) => { setRepassword(e.target.value) }} />
                                             <div><font color="red">{repasswordValidation}</font></div>
                                         </Form.Group>
-
                                         <Button variant="primary" onClick={() => validateFields(true, language)}>
                                             {submitButtonLabel}
                                         </Button>
@@ -356,7 +374,6 @@ const Register = () => {
             </div>
         </div>
     )
-
 }
 
 export default Register;

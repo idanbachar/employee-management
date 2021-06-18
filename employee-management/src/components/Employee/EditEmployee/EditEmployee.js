@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import Modal from 'react-bootstrap/Modal'
 import Container from 'react-bootstrap/Container'
 import Button from 'react-bootstrap/Button'
@@ -6,7 +6,7 @@ import Form from 'react-bootstrap/Form'
 import Select from 'react-select';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { Pen, PencilFill, PenFill, TrashFill } from 'react-bootstrap-icons';
+import { PencilFill, TrashFill } from 'react-bootstrap-icons';
 import { useDispatch } from 'react-redux';
 import axios from 'axios';
 
@@ -16,6 +16,14 @@ const api = axios.create({
 
 const EditEmployee = (props) => {
 
+    // config object with received access token:
+    const config = {
+        headers: {
+            Authorization: 'Bearer ' + localStorage.getItem("token")
+        }
+    }
+
+    // form update fields states:
     const [id, setId] = useState(props.data.id);
     const [firstname, setFirstName] = useState(props.data.firstname);
     const [lastname, setLastName] = useState(props.data.lastname);
@@ -24,26 +32,31 @@ const EditEmployee = (props) => {
     const [role, setRole] = useState(props.data.role);
     const [startDate, setStartDate] = useState(new Date(props.data.startDate));
 
+    // form update fields validation states:
     const [firstnameValidation, setFirstnameValidation] = useState(null);
     const [lastnameValidation, setLastnameValidation] = useState(null);
     const [phoneValidation, setPhoneValidation] = useState(null);
     const [addressValidation, setAddressValidation] = useState(null);
     const [roleValidation, setRoleValidation] = useState(null);
 
+    // update employee modal state:
     const [modalShow, setModalShow] = React.useState(false);
+
+    // redux dispatch:
     const dispatch = useDispatch();
 
+    // show delete employee dialog state:
     const [showDialog, setShowDialog] = useState(false);
-
     const handleClose = () => setShowDialog(false);
-    const handleShow = () => setShowDialog(true);
 
+    // array of roles for selection:
     const roles = [
         { label: 'HR', value: 'HR' },
         { label: 'Programmer', value: 'Programmer' },
         { label: 'Data Analyst', value: 'Data Analyst' }
     ]
 
+    // receives a string and returns true if contains only numbers
     const isContainsOnlyNumbers = (value) => {
 
         let digitsCount = 0;
@@ -55,6 +68,7 @@ const EditEmployee = (props) => {
         return value.length == digitsCount;
     }
 
+    // receives a string and returns true if contains numbers
     const isContainsNumber = (value) => {
 
         for (let i = 0; i < value.length; i++) {
@@ -65,7 +79,8 @@ const EditEmployee = (props) => {
         return false;
     }
 
-    const validateData = () => {
+    // checks validation for edit employee's fields and update employee
+    const validateFields = () => {
 
         const isFirstNameValid = validateFirstname();
         const isLastNameValid = validateLastname();
@@ -88,11 +103,12 @@ const EditEmployee = (props) => {
                 "role": role,
                 "startDate": startDate.toDateString()
             }
+
             updateEmployee(updatedData);
         }
     }
 
-
+    // validation for firstname
     const validateFirstname = () => {
 
         if (firstname.length === 0) {
@@ -112,6 +128,7 @@ const EditEmployee = (props) => {
         return true;
     }
 
+    // validation for lastname
     const validateLastname = () => {
 
         if (lastname.length === 0) {
@@ -131,9 +148,10 @@ const EditEmployee = (props) => {
         return true;
     }
 
+    // validation for phone
     const validatePhone = () => {
 
-        const kidometArray = [
+        const phonePrefixArray = [
             "050",
             "051",
             "052",
@@ -146,8 +164,8 @@ const EditEmployee = (props) => {
             "058",
             "059"
         ];
-        const phoneFirstThreeDigits = phone.substring(0, 3);
 
+        const phoneFirstThreeDigits = phone.substring(0, 3);
 
         if (phone.length === 0) {
             setPhoneValidation("Phone can not be empty.")
@@ -161,8 +179,8 @@ const EditEmployee = (props) => {
             setPhoneValidation("Phone can not contain letters.");
             return false;
         }
-        else if (!kidometArray.includes(phoneFirstThreeDigits)) {
-            setPhoneValidation("Phone's kidomet is not valid.");
+        else if (!phonePrefixArray.includes(phoneFirstThreeDigits)) {
+            setPhoneValidation("Phone's prefix is not valid.");
             return false;
         }
 
@@ -170,6 +188,7 @@ const EditEmployee = (props) => {
         return true;
     }
 
+    // validation for address
     const validateAddress = () => {
 
         if (address.length === 0) {
@@ -185,6 +204,7 @@ const EditEmployee = (props) => {
         return true;
     }
 
+    // validation for role
     const validateRole = () => {
 
         if (role === "") {
@@ -196,34 +216,38 @@ const EditEmployee = (props) => {
         return true;
     }
 
-
+    // receives employee and updates
     const updateEmployee = async (employee) => {
 
-        const config = {
-            headers: {
-                Authorization: 'Bearer ' + localStorage.getItem("token")
-            }
-        }
-
+        // send put request to server with received employee's id, employee as data and auth config:
         const response = await api.put(`/${employee.id}`, employee, config);
 
         console.log(response);
+
+        // dispatch redux global state of updated employee:
         dispatch({
             type: 'UPDATE',
             payload: employee
         })
 
-        resetEdit();
+        // get updated employees after employee updated:
+        props.data.getUpdatedEmployees();
+
+        // close edit employee modal:
+        closeEdit();
     }
 
-    const resetEdit = () => {
+    // close edit employee modal
+    const closeEdit = () => {
         setModalShow(false);
     }
 
+    // open delete dialog
     const openDeleteDialog = () => {
         setShowDialog(true);
     }
 
+    // delete employee
     const deleteEmployee = () => {
         props.data.deleteHandler(props.data.id)
         setShowDialog(false);
@@ -231,7 +255,6 @@ const EditEmployee = (props) => {
 
     return (
         <div>
-
             <a onClick={() => setModalShow(true)}><PencilFill color="blue" /></a>
             |
             <a onClick={() => openDeleteDialog(true)}><TrashFill color="red" /></a>
@@ -282,16 +305,14 @@ const EditEmployee = (props) => {
                                 <br />
                                 <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} />
                             </Form.Group>
-
                         </Form>
                     </Container>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button variant="success" onClick={() => validateData()} >Update</Button>
-                    <Button variant="danger" onClick={resetEdit}>Cancel</Button>
+                    <Button variant="success" onClick={() => validateFields()} >Update</Button>
+                    <Button variant="danger" onClick={closeEdit}>Cancel</Button>
                 </Modal.Footer>
             </Modal >
-
             <Modal
                 show={showDialog}
                 onHide={handleClose}
@@ -315,6 +336,4 @@ const EditEmployee = (props) => {
         </div>
     );
 }
-
-
 export default EditEmployee;

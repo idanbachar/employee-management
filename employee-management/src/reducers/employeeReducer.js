@@ -1,4 +1,3 @@
-
 const initialState = [];
 
 const employeeReducer = (state = initialState, action) => {

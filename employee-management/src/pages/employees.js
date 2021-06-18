@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import Table from 'react-bootstrap/Table';
 import axios from 'axios';
-import EmployeeCard from '../components/EmployeeCard/EmployeeCard';
-import { useDispatch, useSelector } from 'react-redux';
+import EmployeeCard from '../components/Employee/EmployeeCard/EmployeeCard';
+import { useDispatch } from 'react-redux';
 import CardDeck from 'react-bootstrap/CardDeck'
 
 const api = axios.create({
@@ -11,11 +11,20 @@ const api = axios.create({
 
 const Employees = () => {
 
-    const [employees, setEmployees] = useState([]);
-    const dispatch = useDispatch();
+    // config object with received access token:
+    const config = {
+        headers: {
+            Authorization: 'Bearer ' + localStorage.getItem("token")
+        }
+    }
 
+    // state of employees:
+    const [employees, setEmployees] = useState([]);
+
+    // state of indication of is mobile resolution:
     const [isMobile, setIsMobile] = useState(false);
 
+    // handles indication of is mobile state
     const handleResize = () => {
         if (window.innerWidth < 720) {
             setIsMobile(true)
@@ -25,37 +34,44 @@ const Employees = () => {
     }
 
     useEffect(() => {
+
+        // listen to screen resolution change and calls handle resize function:
         window.addEventListener("resize", handleResize)
+
     }, [])
 
     useEffect(async () => {
+
+        // get employees data from server when page renders on first time:
         getEmployees();
+
     }, [])
 
+
+    // redux dispatch:
+    const dispatch = useDispatch();
+
+    // get employees data from server:
     const getEmployees = async () => {
 
-        const config = {
-            headers: {
-                Authorization: 'Bearer ' + localStorage.getItem("token")
-            }
-        }
-
+        // get employees data from server using config auth:
         let data = await api.get('/', config)
             .then(({ data }) => data);
 
+        // update state of employees with received employees:
+        setEmployees(data);
+
+        // dispatch redux global state of employees with received employees:
         dispatch({
             type: 'INIT',
             payload: data
         });
-
-        setEmployees(data);
-
     }
 
     return (
         <div>
             <br />
-            {
+            {           /*   2 displays: for computer and mobile     */
                 !isMobile ?
                     <div class="container">
                         <div class="row">
@@ -80,7 +96,6 @@ const Employees = () => {
                                         </thead>
                                         <tbody>
                                             {employees.map(employee =>
-
                                                 <EmployeeCard
                                                     firstname={employee.firstname}
                                                     lastname={employee.lastname}
@@ -102,7 +117,6 @@ const Employees = () => {
                                 <h2>Employees</h2>
                             </div>
                         </div>
-
                         <br />
                         <div class="row">
                             <div class="col-md-12">
@@ -125,11 +139,9 @@ const Employees = () => {
                         </div>
                     </div>
             }
-
             <br />
         </div>
     )
-
 }
 
 export default Employees;

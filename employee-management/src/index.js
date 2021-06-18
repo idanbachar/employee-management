@@ -5,10 +5,10 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { createStore } from 'redux';
-import allReducers from './reducers';
+import AllReducers from './reducers/AllReducers';
 import { Provider } from 'react-redux';
 
-const store = createStore(allReducers);
+const store = createStore(AllReducers);
 
 ReactDOM.render(
   <React.StrictMode>

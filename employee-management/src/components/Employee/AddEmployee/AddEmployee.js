@@ -10,6 +10,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 const AddEmployee = (props) => {
 
+    // form add employee fields states:
     const [firstname, setFirstName] = useState('');
     const [lastname, setLastName] = useState('');
     const [phone, setPhone] = useState('');
@@ -17,18 +18,21 @@ const AddEmployee = (props) => {
     const [role, setRole] = useState('');
     const [startDate, setStartDate] = useState(new Date());
 
+    // form add employee fields validation states:
     const [firstnameValidation, setFirstnameValidation] = useState(null);
     const [lastnameValidation, setLastnameValidation] = useState(null);
     const [phoneValidation, setPhoneValidation] = useState(null);
     const [addressValidation, setAddressValidation] = useState(null);
     const [roleValidation, setRoleValidation] = useState(null);
 
+    // array of roles for selection:
     const roles = [
         { label: 'HR', value: 'HR' },
         { label: 'Programmer', value: 'Programmer' },
         { label: 'Data Analyst', value: 'Data Analyst' }
     ]
 
+    // receives a string and returns true if contains only numbers
     const isContainsOnlyNumbers = (value) => {
 
         let digitsCount = 0;
@@ -40,6 +44,7 @@ const AddEmployee = (props) => {
         return value.length == digitsCount;
     }
 
+    // receives a string and returns true if contains numbers
     const isContainsNumber = (value) => {
 
         for (let i = 0; i < value.length; i++) {
@@ -50,7 +55,8 @@ const AddEmployee = (props) => {
         return false;
     }
 
-    const validateData = () => {
+    // checks validation for add employee
+    const validateFields = () => {
 
         const isFirstNameValid = validateFirstname();
         const isLastNameValid = validateLastname();
@@ -78,7 +84,7 @@ const AddEmployee = (props) => {
         }
     }
 
-
+    // validation for firstname
     const validateFirstname = () => {
 
         if (firstname.length === 0) {
@@ -98,6 +104,7 @@ const AddEmployee = (props) => {
         return true;
     }
 
+    // validation for lastname
     const validateLastname = () => {
 
         if (lastname.length === 0) {
@@ -117,9 +124,10 @@ const AddEmployee = (props) => {
         return true;
     }
 
+    // validation for phone
     const validatePhone = () => {
 
-        const kidometArray = [
+        const phonePrefixArray = [
             "050",
             "051",
             "052",
@@ -132,8 +140,8 @@ const AddEmployee = (props) => {
             "058",
             "059"
         ];
-        const phoneFirstThreeDigits = phone.substring(0, 3);
 
+        const phoneFirstThreeDigits = phone.substring(0, 3);
 
         if (phone.length === 0) {
             setPhoneValidation("Phone can not be empty.")
@@ -147,7 +155,7 @@ const AddEmployee = (props) => {
             setPhoneValidation("Phone can not contain letters.");
             return false;
         }
-        else if (!kidometArray.includes(phoneFirstThreeDigits)) {
+        else if (!phonePrefixArray.includes(phoneFirstThreeDigits)) {
             setPhoneValidation("Phone's kidomet is not valid.");
             return false;
         }
@@ -156,6 +164,7 @@ const AddEmployee = (props) => {
         return true;
     }
 
+    // validation for address
     const validateAddress = () => {
 
         if (address.length === 0) {
@@ -171,6 +180,7 @@ const AddEmployee = (props) => {
         return true;
     }
 
+    // validation for role
     const validateRole = () => {
 
         if (role === "") {
@@ -227,17 +237,13 @@ const AddEmployee = (props) => {
                             <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} />
                         </Form.Group>
                     </Form>
-
-
                 </Container>
             </Modal.Body>
             <Modal.Footer>
-                <Button variant="success" onClick={() => validateData()}>Add</Button>
+                <Button variant="success" onClick={() => validateFields()}>Add</Button>
                 <Button variant="danger" onClick={props.onHide}>Cancel</Button>
             </Modal.Footer>
         </Modal >
     );
 }
-
-
 export default AddEmployee;

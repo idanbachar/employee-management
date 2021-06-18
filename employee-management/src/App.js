@@ -1,38 +1,38 @@
 import './App.css';
-import Login from './pages/login';
-import Register from './pages/register';
-import Manage from './pages/manage';
-import Employees from './pages/employees';
+import Login from './pages/Login';
+import Register from './pages/Register';
+import Manage from './pages/Manage';
+import Employees from './pages/Employees';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav'
-import { DoorClosed, DoorClosedFill, DoorOpen, PencilFill } from 'react-bootstrap-icons';
+import { DoorOpen } from 'react-bootstrap-icons';
 
 import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link,
-  Redirect
+  Link
 } from 'react-router-dom'
 
 function App() {
 
+  // logout current logged in user
   const logout = () => {
 
+    // clear localstorage:
     localStorage.clear();
+
+    // reload page:
     window.location.reload();
   }
 
-
   return (
-
     <div className="App">
       <Router>
         <header className="App-header">
         </header>
         <div class="row">
           <div class="col-md-12">
-
             <Navbar bg="light" expand="lg">
               <Navbar.Brand href="#"><img src="https://ls-techs.com/wp-content/uploads/2019/07/logo.png" /></Navbar.Brand>
               <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -52,50 +52,45 @@ function App() {
                       {
                         JSON.parse(localStorage.getItem("userData")).firstname + " " + JSON.parse(localStorage.getItem("userData")).lastname
                       }
-
                     </div>
                     <div class="col-md-4">
                       <Nav.Link><Link onClick={logout}><DoorOpen /></Link></Nav.Link>
                     </div>
-
                   </Nav>
-
                   : null
                 }
               </Navbar.Collapse>
             </Navbar>
-
           </div>
         </div>
-
-
-        {/* A <Switch> looks through its children <Route>s and
-            renders the first one that matches the current URL. */}
         <Switch>
-          <Route path="/login">
+          <Route path="/" exact>
+            {localStorage.getItem("isLogin") === null ?
+              <Login /> :
+              <Manage />
+            }
+          </Route>
+          <Route path="/login" exact>
             <Login />
           </Route>
-          <Route path="/register">
+          <Route path="/register" exact>
             <Register />
           </Route>
-          <Route path="/manage">
+          <Route path="/manage" exact>
             {localStorage.getItem("isLogin") !== null ?
               <Manage /> :
               <Login />
-
             }
           </Route>
-          <Route path="/employees">
+          <Route path="/employees" exact>
             {localStorage.getItem("isLogin") !== null ?
               <Employees /> :
               <Login />
             }
           </Route>
         </Switch>
-
       </Router>
     </div >
   );
 }
-
 export default App;
