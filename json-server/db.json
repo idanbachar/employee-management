@@ -24,8 +24,17 @@
       "lastname": "Sadlovski",
       "phone": "0502141241",
       "address": "Jerusalem",
-      "role": "HR",
+      "role": "Programmer",
       "startDate": "Sun Jun 06 2021"
+    },
+    {
+      "id": "54edb5e0-c6e0-4f7f-9db4-eb31043c53b7",
+      "firstname": "Ezio",
+      "lastname": "Auditore",
+      "phone": "0505123421",
+      "address": "Venice, Italy",
+      "role": "HR",
+      "startDate": "Wed Jun 02 2021"
     }
   ],
   "users": [

@@ -125,6 +125,7 @@ const Manage = () => {
                                             {employees.map(employee =>
 
                                                 <EmployeeCard
+                                                    id={employee.id}
                                                     firstname={employee.firstname}
                                                     lastname={employee.lastname}
                                                     phone={employee.phone}

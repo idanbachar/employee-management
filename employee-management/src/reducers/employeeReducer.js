@@ -9,7 +9,8 @@ const employeeReducer = (state = initialState, action) => {
             state = action.payload;
             return state;
         case 'ADD':
-            return [...state, action.payload];
+            state = action.payload;
+            return state;
         case 'UPDATE':
             const employees = [...state];
             const employeeIndex = employees.findIndex(employee => {

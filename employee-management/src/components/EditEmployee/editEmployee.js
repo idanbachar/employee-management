@@ -10,7 +10,6 @@ import { Pen, PencilFill, PenFill, TrashFill } from 'react-bootstrap-icons';
 import { useDispatch } from 'react-redux';
 import axios from 'axios';
 
-
 const api = axios.create({
     baseURL: `http://localhost:3000/employees`
 })
@@ -270,6 +269,9 @@ const EditEmployee = (props) => {
                                 <Form.Label>Role</Form.Label>
                                 <Select
                                     label="Select somthing"
+                                    value={roles.find(r => {
+                                        return r.value === role
+                                    })}
                                     options={roles}
                                     onChange={(e) => setRole(e.label)}
                                 />
@@ -277,6 +279,7 @@ const EditEmployee = (props) => {
                             </Form.Group>
                             <Form.Group className="mb-3" controlId="formGroupRoll">
                                 <Form.Label>Start Date</Form.Label>
+                                <br />
                                 <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} />
                             </Form.Group>
 
