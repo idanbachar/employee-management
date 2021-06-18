@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import Card from 'react-bootstrap/Card'
@@ -66,6 +66,25 @@ const Register = () => {
         width: '60%',
         margin: 'auto'
     }
+
+    // handles indication of is mobile state
+    const handleResize = () => {
+        if (window.innerWidth < 720) {
+            sessionStorage.setItem("isMobile", "true");
+
+        } else {
+            sessionStorage.setItem("isMobile", "false");
+        }
+    }
+
+    useEffect(() => {
+
+        handleResize();
+
+        // listen to screen resolution change and calls handle resize function:
+        window.addEventListener("resize", handleResize);
+
+    })
 
     // receives isFlag = (if true start validation and handle register), and language
     // updates validation language and handles register
