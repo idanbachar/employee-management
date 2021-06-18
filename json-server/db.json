@@ -26,24 +26,6 @@
       "address": "Jerusalem",
       "role": "HR",
       "startDate": "Sun Jun 06 2021"
-    },
-    {
-      "id": "54c6584f-1b9b-4d79-9bc7-f604c3abdfa1",
-      "firstname": "Tony",
-      "lastname": "Stark",
-      "phone": "0522323232",
-      "address": "New York",
-      "role": "Programmer",
-      "startDate": "Wed Apr 28 2021"
-    },
-    {
-      "id": "e8c105e1-c08e-41ea-a8dc-df43c94d4801",
-      "firstname": "Maor",
-      "lastname": "Shvartz",
-      "phone": "0502123123",
-      "address": "Oranit",
-      "role": "Programmer",
-      "startDate": "Mon May 31 2021"
     }
   ],
   "users": [
