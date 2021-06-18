@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Table from 'react-bootstrap/Table';
 import axios from 'axios';
 import EmployeeCard from '../components/Employee/EmployeeCard/EmployeeCard';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import CardDeck from 'react-bootstrap/CardDeck'
 
 const api = axios.create({
@@ -21,15 +21,23 @@ const Employees = () => {
     // state of employees:
     const [employees, setEmployees] = useState([]);
 
+    const isMobileRedux = useSelector(state => state.isMobile);
+
     // state of indication of is mobile resolution:
-    const [isMobile, setIsMobile] = useState(false);
+    const [isMobile, setIsMobile] = useState(isMobileRedux);
 
     // handles indication of is mobile state
     const handleResize = () => {
         if (window.innerWidth < 720) {
-            setIsMobile(true)
+            setIsMobile(true);
+            dispatch({
+                type: 'Mobile'
+            })
         } else {
-            setIsMobile(false)
+            setIsMobile(false);
+            dispatch({
+                type: 'Computer'
+            })
         }
     }
 
@@ -97,6 +105,8 @@ const Employees = () => {
                                         <tbody>
                                             {employees.map(employee =>
                                                 <EmployeeCard
+                                                    key={employee.id}
+                                                    id={employee.id}
                                                     firstname={employee.firstname}
                                                     lastname={employee.lastname}
                                                     phone={employee.phone}

@@ -6,7 +6,7 @@ import AddEmployee from '../components/Employee/AddEmployee/AddEmployee';
 import { v4 as uuidv4 } from 'uuid';
 import Button from 'react-bootstrap/Button'
 import EmployeeCard from '../components/Employee/EmployeeCard/EmployeeCard';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import CardDeck from 'react-bootstrap/CardDeck'
 
 const api = axios.create({
@@ -22,8 +22,10 @@ const Manage = () => {
         }
     }
 
+    const isMobileRedux = useSelector(state => state.isMobile);
+
     // state of indication of is mobile resolution:
-    const [isMobile, setIsMobile] = useState(false);
+    const [isMobile, setIsMobile] = useState(isMobileRedux);
 
     // state of employees:
     const [employees, setEmployees] = useState([]);
@@ -34,9 +36,15 @@ const Manage = () => {
     // handles indication of is mobile state
     const handleResize = () => {
         if (window.innerWidth < 720) {
-            setIsMobile(true)
+            setIsMobile(true);
+            dispatch({
+                type: 'Mobile'
+            })
         } else {
-            setIsMobile(false)
+            setIsMobile(false);
+            dispatch({
+                type: 'Computer'
+            })
         }
     }
 

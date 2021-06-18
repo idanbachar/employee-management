@@ -1,6 +1,6 @@
 const initialState = [];
 
-const employeeReducer = (state = initialState, action) => {
+const EmployeeReducer = (state = initialState, action) => {
 
     switch (action.type) {
 
@@ -31,4 +31,4 @@ const employeeReducer = (state = initialState, action) => {
     }
 }
 
-export default employeeReducer;
+export default EmployeeReducer;
