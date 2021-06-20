@@ -34,7 +34,7 @@ function App() {
         <div class="row">
           <div class="col-md-12">
             <Navbar bg="light" expand="lg">
-              <Navbar.Brand href="#"><img src="https://ls-techs.com/wp-content/uploads/2019/07/logo.png" /></Navbar.Brand>
+              <Navbar.Brand href="#">Employee Managment</Navbar.Brand>
               <Navbar.Toggle aria-controls="basic-navbar-nav" />
               <Navbar.Collapse id="basic-navbar-nav">
                 {localStorage.getItem("isLogin") !== null ?
