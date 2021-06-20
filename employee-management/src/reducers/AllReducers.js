@@ -1,4 +1,4 @@
-import EmployeeReducer from './EmployeeReducer'
+import EmployeeReducer from './employeeReducer'
 import MobileReducer from './MobileReducer';
 import { combineReducers } from "redux";
 

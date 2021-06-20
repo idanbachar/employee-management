@@ -1,8 +1,8 @@
 import './App.css';
-import Login from './pages/Login';
-import Register from './pages/Register';
-import Manage from './pages/Manage';
-import Employees from './pages/Employees';
+import Login from './pages/login';
+import Register from './pages/register';
+import Manage from './pages/manage';
+import Employees from './pages/employees';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav'
 import { DoorOpen } from 'react-bootstrap-icons';
